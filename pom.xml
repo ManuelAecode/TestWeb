@@ -11,7 +11,7 @@
 	<groupId>ai.aecode</groupId>
 	<artifactId>testweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>testweb</name>
 	<description>testweb</description>
 	<url/>
