@@ -1,7 +1,9 @@
 package ai.aecode.testweb.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,14 +15,16 @@ public class ZodiacSign {
     @Column(name = "sign_name")
     private String sign_name;
     @Column(name="sign_startdate")
-    private Date sign_startdate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate sign_startdate;
     @Column(name="sign_enddate")
-    private Date sign_enddate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate sign_enddate;
 
     public ZodiacSign() {
     }
 
-    public ZodiacSign(int id_zodiac, String sign_name, Date sign_startdate, Date sign_enddate) {
+    public ZodiacSign(int id_zodiac, String sign_name, LocalDate sign_startdate, LocalDate sign_enddate) {
         this.id_zodiac = id_zodiac;
         this.sign_name = sign_name;
         this.sign_startdate = sign_startdate;
@@ -43,19 +47,19 @@ public class ZodiacSign {
         this.sign_name = sign_name;
     }
 
-    public Date getSign_startdate() {
+    public LocalDate getSign_startdate() {
         return sign_startdate;
     }
 
-    public void setSign_startdate(Date sign_startdate) {
+    public void setSign_startdate(LocalDate sign_startdate) {
         this.sign_startdate = sign_startdate;
     }
 
-    public Date getSign_enddate() {
+    public LocalDate getSign_enddate() {
         return sign_enddate;
     }
 
-    public void setSign_enddate(Date sign_enddate) {
+    public void setSign_enddate(LocalDate sign_enddate) {
         this.sign_enddate = sign_enddate;
     }
 }
