@@ -13,12 +13,6 @@ public class ZodiacSign {
     private int id_zodiac;
     @Column(name = "sign_name")
     private String sign_name;
-    @Column(name="sign_startdate")
-    @JsonFormat(pattern = "dd-MM")
-    private MonthDay sign_startdate;
-    @Column(name="sign_enddate")
-    @JsonFormat(pattern = "dd-MM")
-    private MonthDay sign_enddate;
 
     public ZodiacSign() {
     }
@@ -26,8 +20,7 @@ public class ZodiacSign {
     public ZodiacSign(int id_zodiac, String sign_name, MonthDay sign_startdate, MonthDay sign_enddate) {
         this.id_zodiac = id_zodiac;
         this.sign_name = sign_name;
-        this.sign_startdate = sign_startdate;
-        this.sign_enddate = sign_enddate;
+
     }
 
     public int getId_zodiac() {
@@ -45,20 +38,5 @@ public class ZodiacSign {
     public void setSign_name(String sign_name) {
         this.sign_name = sign_name;
     }
-
-    public MonthDay getSign_startdate() {
-        return sign_startdate;
-    }
-
-    public void setSign_startdate(MonthDay sign_startdate) {
-        this.sign_startdate = sign_startdate;
-    }
-
-    public MonthDay getSign_enddate() {
-        return sign_enddate;
-    }
-
-    public void setSign_enddate(MonthDay sign_enddate) {
-        this.sign_enddate = sign_enddate;
-    }
+    
 }

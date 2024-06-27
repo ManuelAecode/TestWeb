@@ -36,11 +36,11 @@ public class UserAnswer {
         this.id_useranswer = id_useranswer;
     }
 
-    public UserProfile getUser() {
+    public UserProfile getUserProfile() {
         return userProfile;
     }
 
-    public void setUser(UserProfile userProfile) {
+    public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
 

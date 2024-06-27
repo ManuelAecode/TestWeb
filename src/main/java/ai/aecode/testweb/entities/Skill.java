@@ -35,4 +35,5 @@ public class Skill {
     public void setSkill_name(String skill_name) {
         this.skill_name = skill_name;
     }
+
 }

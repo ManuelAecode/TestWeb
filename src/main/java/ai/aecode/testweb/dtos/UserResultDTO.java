@@ -9,6 +9,7 @@ public class UserResultDTO {
     private UserProfile userProfile;
     private PersonType personType;
     private Double result_percentage;
+    private String person_type_description;
 
     public int getId_userresult() {
         return id_userresult;
@@ -18,11 +19,11 @@ public class UserResultDTO {
         this.id_userresult = id_userresult;
     }
 
-    public UserProfile getUser() {
+    public UserProfile getUserProfile() {
         return userProfile;
     }
 
-    public void setUser(UserProfile userProfile) {
+    public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
 
@@ -40,5 +41,13 @@ public class UserResultDTO {
 
     public void setResult_percentage(Double result_percentage) {
         this.result_percentage = result_percentage;
+    }
+
+    public String getPerson_type_description() {
+        return person_type_description;
+    }
+
+    public void setPerson_type_description(String person_type_description) {
+        this.person_type_description = person_type_description;
     }
 }

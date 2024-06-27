@@ -79,4 +79,5 @@ public class Answer {
     public void setValue_executor(double value_executor) {
         this.value_executor = value_executor;
     }
+
 }
