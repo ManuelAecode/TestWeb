@@ -3,9 +3,7 @@ package ai.aecode.testweb.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.MonthDay;
-import java.util.Date;
 
 @Entity
 @Table(name = "zodiacsign")

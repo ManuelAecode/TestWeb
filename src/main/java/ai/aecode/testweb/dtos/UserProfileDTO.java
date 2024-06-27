@@ -1,6 +1,7 @@
 package ai.aecode.testweb.dtos;
 import ai.aecode.testweb.entities.Element;
 import ai.aecode.testweb.entities.ZodiacSign;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
@@ -8,6 +9,7 @@ public class UserProfileDTO {
     private int id_user;
     private String user_name;
     private String user_email;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate user_birthday;
     private String user_gender;
     private ZodiacSign zodiacsign;

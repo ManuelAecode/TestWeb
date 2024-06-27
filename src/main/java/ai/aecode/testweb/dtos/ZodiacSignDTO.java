@@ -1,14 +1,18 @@
 package ai.aecode.testweb.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 
+import java.time.MonthDay;
 import java.util.Date;
 
 public class ZodiacSignDTO {
     private int id_zodiac;
     private String sign_name;
-    private Date sign_startdate;
-    private Date sign_enddate;
+    @JsonFormat(pattern = "dd-MM")
+    private MonthDay sign_startdate;
+    @JsonFormat(pattern = "dd-MM")
+    private MonthDay sign_enddate;
 
     public int getId_zodiac() {
         return id_zodiac;
@@ -26,19 +30,19 @@ public class ZodiacSignDTO {
         this.sign_name = sign_name;
     }
 
-    public Date getSign_startdate() {
+    public MonthDay getSign_startdate() {
         return sign_startdate;
     }
 
-    public void setSign_startdate(Date sign_startdate) {
+    public void setSign_startdate(MonthDay sign_startdate) {
         this.sign_startdate = sign_startdate;
     }
 
-    public Date getSign_enddate() {
+    public MonthDay getSign_enddate() {
         return sign_enddate;
     }
 
-    public void setSign_enddate(Date sign_enddate) {
+    public void setSign_enddate(MonthDay sign_enddate) {
         this.sign_enddate = sign_enddate;
     }
 }
