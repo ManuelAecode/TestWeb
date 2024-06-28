@@ -4,11 +4,13 @@ import ai.aecode.testweb.entities.Answer;
 import ai.aecode.testweb.entities.Question;
 import ai.aecode.testweb.entities.UserProfile;
 
+import java.util.Set;
+
 public class UserAnswerDTO {
     private int id_useranswer;
     private UserProfile userProfile;
     private Question question;
-    private Answer answer;
+    private Set<Answer> answer;
 
     public int getId_useranswer() {
         return id_useranswer;
@@ -18,11 +20,11 @@ public class UserAnswerDTO {
         this.id_useranswer = id_useranswer;
     }
 
-    public UserProfile getUser() {
+    public UserProfile getUserProfile() {
         return userProfile;
     }
 
-    public void setUser(UserProfile userProfile) {
+    public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
 
@@ -34,11 +36,13 @@ public class UserAnswerDTO {
         this.question = question;
     }
 
-    public Answer getAnswer() {
+
+    public Set<Answer> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Answer answer) {
+    public void setAnswer(Set<Answer> answer) {
         this.answer = answer;
     }
+
 }

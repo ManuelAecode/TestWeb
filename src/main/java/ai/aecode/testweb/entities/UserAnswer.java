@@ -2,6 +2,8 @@ package ai.aecode.testweb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "useranswer")
 public class UserAnswer {
@@ -11,20 +13,18 @@ public class UserAnswer {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private UserProfile userProfile;
-    @ManyToOne
-    @JoinColumn(name = "id_question")
-    private Question question;
-    @ManyToOne
-    @JoinColumn(name = "id_answer")
-    private Answer answer;
+    @ManyToMany
+    @JoinTable(name = "detail_Answer",
+            joinColumns = @JoinColumn(name = "id_useranswer"),
+            inverseJoinColumns = @JoinColumn(name = "id_answer"))
+    private Set<Answer> answer;
 
     public UserAnswer() {
     }
 
-    public UserAnswer(int id_useranswer, UserProfile userProfile, Question question, Answer answer) {
+    public UserAnswer(int id_useranswer, UserProfile userProfile, Set<Answer> answer) {
         this.id_useranswer = id_useranswer;
         this.userProfile = userProfile;
-        this.question = question;
         this.answer = answer;
     }
 
@@ -44,19 +44,11 @@ public class UserAnswer {
         this.userProfile = userProfile;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
-    public Answer getAnswer() {
+    public Set<Answer> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Answer answer) {
+    public void setAnswer(Set<Answer> answer) {
         this.answer = answer;
     }
 }
