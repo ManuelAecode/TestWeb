@@ -15,6 +15,7 @@ ai\aecode\testweb\dtos\PersonTypeDTO.class
 ai\aecode\testweb\services\IUserResultService.class
 ai\aecode\testweb\controllers\ZodiacSignController.class
 ai\aecode\testweb\servicesimplement\PersonTypeServiceImplement.class
+ai\aecode\testweb\dtos\UserQuestionDTO.class
 ai\aecode\testweb\services\IPersonTypeService.class
 ai\aecode\testweb\servicesimplement\SkillServiceImplement.class
 ai\aecode\testweb\services\IUserAnswerService.class

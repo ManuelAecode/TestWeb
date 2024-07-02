@@ -48,6 +48,7 @@ C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\jav
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\controllers\ZodiacSignController.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\dtos\AnswerDTO.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\repositories\IUserProfileRepository.java
+C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\dtos\UserQuestionDTO.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\controllers\ElementController.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\services\IUserAnswerService.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\repositories\IElementRepository.java
