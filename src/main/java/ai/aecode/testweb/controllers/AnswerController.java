@@ -2,7 +2,9 @@ package ai.aecode.testweb.controllers;
 
 import ai.aecode.testweb.dtos.AnswerDTO;
 import ai.aecode.testweb.entities.Answer;
+import ai.aecode.testweb.entities.Question;
 import ai.aecode.testweb.services.IAnswerService;
+import ai.aecode.testweb.services.IQuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +17,35 @@ import java.util.stream.Collectors;
 public class AnswerController {
     @Autowired
     private IAnswerService aS;
+    @Autowired
+    private IQuestionService qS;
 
     @PostMapping
     public void insert(@RequestBody AnswerDTO dto){
-        ModelMapper m=new ModelMapper();
-        Answer a= m.map(dto,Answer.class);
+        ModelMapper m = new ModelMapper();
+        Answer a = m.map(dto, Answer.class);
+
+        // Obtener la pregunta correspondiente al id proporcionado en el AnswerDTO
+        Question question = qS.listId(dto.getId_question());
+        if (question != null) {
+            a.setQuestion(question);
+        }
+
         aS.insert(a);
     }
 
     @GetMapping
     public List<AnswerDTO> list() {
-        return aS.list().stream().map(x -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(x, AnswerDTO.class);
-        }).collect(Collectors.toList());
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.typeMap(Answer.class, AnswerDTO.class)
+                .addMapping(src -> src.getQuestion().getId_question(), AnswerDTO::setId_question);
+
+        List<Answer> answerList = aS.list();
+        List<AnswerDTO> answerDTOList = answerList.stream()
+                .map(answer -> modelMapper.map(answer, AnswerDTO.class))
+                .collect(Collectors.toList());
+
+        return answerDTOList;
     }
 
     @DeleteMapping("/{id}")

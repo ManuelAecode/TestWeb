@@ -1,6 +1,10 @@
 package ai.aecode.testweb.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "question")
@@ -16,15 +20,18 @@ public class Question {
     private Element element;
     @Column(name = "question_text")
     private String question_text;
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers;
 
     public Question() {
     }
 
-    public Question(int id_question, Skill skill, Element element, String question_text) {
+    public Question(int id_question, Skill skill, Element element, String question_text, List<Answer> answers) {
         this.id_question = id_question;
         this.skill = skill;
         this.element = element;
         this.question_text = question_text;
+        this.answers = answers;
     }
 
     public int getId_question() {
@@ -59,4 +66,11 @@ public class Question {
         this.question_text = question_text;
     }
 
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 }

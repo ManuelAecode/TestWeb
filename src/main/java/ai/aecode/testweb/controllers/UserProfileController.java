@@ -1,10 +1,12 @@
 package ai.aecode.testweb.controllers;
 
 import ai.aecode.testweb.dtos.UserProfileDTO;
+import ai.aecode.testweb.dtos.UserQuestionDTO;
 import ai.aecode.testweb.entities.UserProfile;
 import ai.aecode.testweb.services.IUserProfileService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,4 +49,14 @@ public class UserProfileController {
         UserProfile s = m.map(dto, UserProfile.class);
         upS.insert(s);
     }
+
+    @GetMapping("/{userId}/questions")
+    public ResponseEntity<List<UserQuestionDTO>> getUserQuestionsByElement(@PathVariable int userId) {
+        List<UserQuestionDTO> questions = upS.getUserQuestionnaireByElement(userId);
+        if (questions == null) {
+            return ResponseEntity.notFound().build(); // Manejar caso de usuario no encontrado
+        }
+        return ResponseEntity.ok(questions);
+    }
+
 }

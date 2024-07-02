@@ -1,7 +1,11 @@
 package ai.aecode.testweb.dtos;
 
+import ai.aecode.testweb.entities.Answer;
 import ai.aecode.testweb.entities.Element;
 import ai.aecode.testweb.entities.Skill;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDTO {
     private int id_question;
@@ -40,4 +44,5 @@ public class QuestionDTO {
     public void setQuestion_text(String question_text) {
         this.question_text = question_text;
     }
+
 }

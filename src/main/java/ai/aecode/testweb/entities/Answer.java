@@ -1,5 +1,6 @@
 package ai.aecode.testweb.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,9 +9,6 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_answer;
-    @ManyToOne
-    @JoinColumn(name = "id_question")
-    private Question question;
     @Column(name = "answer_text")
     private String answer_text;
     @Column(name = "value_manager")
@@ -19,17 +17,20 @@ public class Answer {
     private double value_developer;
     @Column(name = "value_executor")
     private double value_executor;
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 
     public Answer() {
     }
 
-    public Answer(int id_answer, Question question, String answer_text, double value_manager, double value_developer, double value_executor) {
+    public Answer(int id_answer, String answer_text, double value_manager, double value_developer, double value_executor, Question question) {
         this.id_answer = id_answer;
-        this.question = question;
         this.answer_text = answer_text;
         this.value_manager = value_manager;
         this.value_developer = value_developer;
         this.value_executor = value_executor;
+        this.question = question;
     }
 
     public int getId_answer() {
@@ -38,14 +39,6 @@ public class Answer {
 
     public void setId_answer(int id_answer) {
         this.id_answer = id_answer;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
     }
 
     public String getAnswer_text() {
@@ -80,4 +73,11 @@ public class Answer {
         this.value_executor = value_executor;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }

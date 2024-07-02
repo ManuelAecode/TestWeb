@@ -2,11 +2,11 @@ package ai.aecode.testweb.dtos;
 import ai.aecode.testweb.entities.Question;
 public class AnswerDTO {
     private int id_answer;
-    private Question question;
     private String answer_text;
     private double value_manager;
     private double value_developer;
     private double value_executor;
+    private int id_question;
 
     public int getId_answer() {
         return id_answer;
@@ -14,14 +14,6 @@ public class AnswerDTO {
 
     public void setId_answer(int id_answer) {
         this.id_answer = id_answer;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
     }
 
     public String getAnswer_text() {
@@ -54,5 +46,13 @@ public class AnswerDTO {
 
     public void setValue_executor(double value_executor) {
         this.value_executor = value_executor;
+    }
+
+    public int getId_question() {
+        return id_question;
+    }
+
+    public void setId_question(int id_question) {
+        this.id_question = id_question;
     }
 }
