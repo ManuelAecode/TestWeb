@@ -9,7 +9,6 @@ import java.util.Set;
 public class UserAnswerDTO {
     private int id_useranswer;
     private UserProfile userProfile;
-    private Question question;
     private Set<Answer> answer;
 
     public int getId_useranswer() {
@@ -27,15 +26,6 @@ public class UserAnswerDTO {
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
 
     public Set<Answer> getAnswer() {
         return answer;
