@@ -66,21 +66,24 @@ public class UserProfileServiceImplement implements IUserProfileService {
                                 AnswerDTO answerDTO = new AnswerDTO();
                                 answerDTO.setId_answer(answer.getId_answer());
                                 answerDTO.setAnswer_text(answer.getAnswer_text());
+                                // Establece los valores como value_manager, value_developer, value_executor aquí
+                                answerDTO.setValue_manager(answer.getValue_manager());
+                                answerDTO.setValue_developer(answer.getValue_developer());
+                                answerDTO.setValue_executor(answer.getValue_executor());
+                                answerDTO.setId_question(answer.getQuestion().getId_question());
                                 return answerDTO;
                             })
                             .collect(Collectors.toList());
 
                     UserQuestionDTO userQuestionDTO = new UserQuestionDTO();
-                    userQuestionDTO.setIdQuestion(question.getId_question());
-                    userQuestionDTO.setQuestionText(question.getQuestion_text());
-                    userQuestionDTO.setSkillName(question.getSkill().getSkill_name());
-                    userQuestionDTO.setElementName(question.getElement().getElement_name());
-                    userQuestionDTO.setAnswers(answerDTOs);
+                    userQuestionDTO.setId_question(question.getId_question());
+                    userQuestionDTO.setQuestion_text(question.getQuestion_text());
+                    userQuestionDTO.setSkill_name(question.getSkill().getSkill_name());
+                    userQuestionDTO.setElement_name(question.getElement().getElement_name());
+                    userQuestionDTO.setAnswer(answerDTOs);
                     return userQuestionDTO;
                 })
                 .collect(Collectors.toList());
-
         return userQuestionDTOs;
     }
-
 }

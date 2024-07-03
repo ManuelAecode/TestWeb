@@ -24,7 +24,6 @@ public class AnswerController {
     public void insert(@RequestBody AnswerDTO dto){
         ModelMapper m = new ModelMapper();
         Answer a = m.map(dto, Answer.class);
-
         // Obtener la pregunta correspondiente al id proporcionado en el AnswerDTO
         Question question = qS.listId(dto.getId_question());
         if (question != null) {
@@ -38,7 +37,10 @@ public class AnswerController {
     public List<AnswerDTO> list() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.typeMap(Answer.class, AnswerDTO.class)
-                .addMapping(src -> src.getQuestion().getId_question(), AnswerDTO::setId_question);
+                .addMapping(src -> src.getQuestion().getId_question(), AnswerDTO::setId_question)
+                .addMapping(Answer::getValue_manager, AnswerDTO::setValue_manager)
+                .addMapping(Answer::getValue_developer, AnswerDTO::setValue_developer)
+                .addMapping(Answer::getValue_executor, AnswerDTO::setValue_executor);
 
         List<Answer> answerList = aS.list();
         List<AnswerDTO> answerDTOList = answerList.stream()

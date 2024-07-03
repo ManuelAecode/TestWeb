@@ -1,5 +1,6 @@
 package ai.aecode.testweb.services;
 
+import ai.aecode.testweb.entities.UserAnswer;
 import ai.aecode.testweb.entities.UserResult;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface IUserResultService {
     List<UserResult> list();
     public void delete(int id_userresult);
     public UserResult listId(int id_userresult);
+    UserResult getUserResultByUserId(int userId);
 }

@@ -2,13 +2,16 @@ package ai.aecode.testweb.dtos;
 
 import ai.aecode.testweb.entities.PersonType;
 import ai.aecode.testweb.entities.UserProfile;
+import jakarta.persistence.Column;
 
 
 public class UserResultDTO {
     private int id_userresult;
     private UserProfile userProfile;
     private PersonType personType;
-    private Double result_percentage;
+    private Double result_manager;
+    private Double result_developer;
+    private Double result_executor;
     private String person_type_description;
 
     public int getId_userresult() {
@@ -35,12 +38,28 @@ public class UserResultDTO {
         this.personType = personType;
     }
 
-    public Double getResult_percentage() {
-        return result_percentage;
+    public Double getResult_manager() {
+        return result_manager;
     }
 
-    public void setResult_percentage(Double result_percentage) {
-        this.result_percentage = result_percentage;
+    public void setResult_manager(Double result_manager) {
+        this.result_manager = result_manager;
+    }
+
+    public Double getResult_developer() {
+        return result_developer;
+    }
+
+    public void setResult_developer(Double result_developer) {
+        this.result_developer = result_developer;
+    }
+
+    public Double getResult_executor() {
+        return result_executor;
+    }
+
+    public void setResult_executor(Double result_executor) {
+        this.result_executor = result_executor;
     }
 
     public String getPerson_type_description() {

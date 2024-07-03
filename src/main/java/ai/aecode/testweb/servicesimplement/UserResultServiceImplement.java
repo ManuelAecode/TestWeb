@@ -1,5 +1,7 @@
 package ai.aecode.testweb.servicesimplement;
 
+import ai.aecode.testweb.entities.UserAnswer;
+import ai.aecode.testweb.entities.UserProfile;
 import ai.aecode.testweb.entities.UserResult;
 import ai.aecode.testweb.repositories.IUserResultRepository;
 import ai.aecode.testweb.services.IUserResultService;
@@ -31,4 +33,12 @@ public class UserResultServiceImplement implements IUserResultService {
     public UserResult listId(int id_userresult) {
         return urR.findById(id_userresult).orElse(new UserResult());
     }
+
+    @Override
+    public UserResult getUserResultByUserId(int userId) {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId_user(userId);
+        return urR.findByUserProfile(userProfile);
+    }
+
 }

@@ -15,19 +15,25 @@ public class UserResult {
     @ManyToOne
     @JoinColumn(name = "id_person_type")
     private PersonType personType;
-    @Column(name = "result_percentage")
-    private Double result_percentage;
+    @Column(name = "result_manager")
+    private Double result_manager;
+    @Column(name = "result_developer")
+    private Double result_developer;
+    @Column(name = "result_executor")
+    private Double result_executor;
     @Column(name = "person_type_description")
     private String person_type_description;
 
     public UserResult() {
     }
 
-    public UserResult(int id_userresult, UserProfile userProfile, PersonType personType, Double result_percentage, String person_type_description) {
+    public UserResult(int id_userresult, UserProfile userProfile, PersonType personType, Double result_manager, Double result_developer, Double result_executor, String person_type_description) {
         this.id_userresult = id_userresult;
         this.userProfile = userProfile;
         this.personType = personType;
-        this.result_percentage = result_percentage;
+        this.result_manager = result_manager;
+        this.result_developer = result_developer;
+        this.result_executor = result_executor;
         this.person_type_description = person_type_description;
     }
 
@@ -55,12 +61,28 @@ public class UserResult {
         this.personType = personType;
     }
 
-    public Double getResult_percentage() {
-        return result_percentage;
+    public Double getResult_manager() {
+        return result_manager;
     }
 
-    public void setResult_percentage(Double result_percentage) {
-        this.result_percentage = result_percentage;
+    public void setResult_manager(Double result_manager) {
+        this.result_manager = result_manager;
+    }
+
+    public Double getResult_developer() {
+        return result_developer;
+    }
+
+    public void setResult_developer(Double result_developer) {
+        this.result_developer = result_developer;
+    }
+
+    public Double getResult_executor() {
+        return result_executor;
+    }
+
+    public void setResult_executor(Double result_executor) {
+        this.result_executor = result_executor;
     }
 
     public String getPerson_type_description() {
@@ -69,5 +91,11 @@ public class UserResult {
 
     public void setPerson_type_description(String person_type_description) {
         this.person_type_description = person_type_description;
+    }
+
+    public void SetResults(double rManager, double rDeveloper, double rExecutor){
+        this.result_manager = rManager;
+        this.result_developer = rDeveloper;
+        this.result_executor = rExecutor;
     }
 }

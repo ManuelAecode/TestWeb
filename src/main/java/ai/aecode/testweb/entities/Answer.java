@@ -18,7 +18,7 @@ public class Answer {
     @Column(name = "value_executor")
     private double value_executor;
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "id_question")
     private Question question;
 
     public Answer() {

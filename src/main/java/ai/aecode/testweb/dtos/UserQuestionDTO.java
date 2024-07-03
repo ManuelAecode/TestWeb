@@ -4,49 +4,49 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class UserQuestionDTO {
-    private int idQuestion;
-    private String questionText;
-    private String skillName;
-    private String elementName;
-    private List<AnswerDTO> answers;
+    private int id_question;
+    private String question_text;
+    private String skill_name;
+    private String element_name;
+    private List<AnswerDTO> answer;
 
-    public int getIdQuestion() {
-        return idQuestion;
+    public int getId_question() {
+        return id_question;
     }
 
-    public void setIdQuestion(int idQuestion) {
-        this.idQuestion = idQuestion;
+    public void setId_question(int id_question) {
+        this.id_question = id_question;
     }
 
-    public String getQuestionText() {
-        return questionText;
+    public String getQuestion_text() {
+        return question_text;
     }
 
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
+    public void setQuestion_text(String question_text) {
+        this.question_text = question_text;
     }
 
-    public String getSkillName() {
-        return skillName;
+    public String getSkill_name() {
+        return skill_name;
     }
 
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public void setSkill_name(String skill_name) {
+        this.skill_name = skill_name;
     }
 
-    public String getElementName() {
-        return elementName;
+    public String getElement_name() {
+        return element_name;
     }
 
-    public void setElementName(String elementName) {
-        this.elementName = elementName;
+    public void setElement_name(String element_name) {
+        this.element_name = element_name;
     }
 
-    public List<AnswerDTO> getAnswers() {
-        return answers;
+    public List<AnswerDTO> getAnswer() {
+        return answer;
     }
 
-    public void setAnswers(List<AnswerDTO> answers) {
-        this.answers = answers;
+    public void setAnswer(List<AnswerDTO> answer) {
+        this.answer = answer;
     }
 }

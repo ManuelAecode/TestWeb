@@ -2,6 +2,7 @@ package ai.aecode.testweb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,15 +15,13 @@ public class UserAnswer {
     @JoinColumn(name = "id_user")
     private UserProfile userProfile;
     @ManyToMany
-    @JoinTable(name = "detail_Answer",
-            joinColumns = @JoinColumn(name = "id_useranswer"),
-            inverseJoinColumns = @JoinColumn(name = "id_answer"))
-    private Set<Answer> answer;
+    private List<Answer> answer;
 
     public UserAnswer() {
     }
 
-    public UserAnswer(int id_useranswer, UserProfile userProfile, Set<Answer> answer) {
+
+    public UserAnswer(int id_useranswer, UserProfile userProfile, List<Answer> answer) {
         this.id_useranswer = id_useranswer;
         this.userProfile = userProfile;
         this.answer = answer;
@@ -44,11 +43,22 @@ public class UserAnswer {
         this.userProfile = userProfile;
     }
 
-    public Set<Answer> getAnswer() {
+    public List<Answer> getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Set<Answer> answer) {
+    public void setAnswer(List<Answer> answer) {
         this.answer = answer;
+    }
+
+    //Formulas
+    public void calculateTotalValues(UserResult userResult){
+        double totalManager=answer.stream().mapToDouble(Answer::getValue_manager)
+                .reduce(1,(a,b)->a*b);
+        double totalDeveloper=answer.stream().mapToDouble(Answer::getValue_developer)
+                .reduce(1,(a,b)->a*b);
+        double totalExecutor=answer.stream().mapToDouble(Answer::getValue_executor)
+                .reduce(1,(a,b)->a*b);
+        userResult.SetResults(totalManager, totalDeveloper, totalExecutor);
     }
 }

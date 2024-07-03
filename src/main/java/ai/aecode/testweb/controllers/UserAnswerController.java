@@ -1,10 +1,15 @@
 package ai.aecode.testweb.controllers;
 
 import ai.aecode.testweb.dtos.UserAnswerDTO;
+import ai.aecode.testweb.dtos.UserResultDTO;
 import ai.aecode.testweb.entities.UserAnswer;
+import ai.aecode.testweb.entities.UserProfile;
+import ai.aecode.testweb.entities.UserResult;
 import ai.aecode.testweb.services.IUserAnswerService;
+import ai.aecode.testweb.services.IUserProfileService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +20,8 @@ import java.util.stream.Collectors;
 public class UserAnswerController {
     @Autowired
     private IUserAnswerService uaS;
+    @Autowired
+    private IUserProfileService upS;
 
     @PostMapping
     public void insert(@RequestBody UserAnswerDTO dto){
@@ -46,4 +53,15 @@ public class UserAnswerController {
         UserAnswer u = m.map(dto, UserAnswer.class);
         uaS.insert(u);
     }
+
+    @GetMapping("/userresult/{userId}")
+    public ResponseEntity<UserResult> getUserResult(@PathVariable("userId") Integer userId) {
+        UserResult userResult = uaS.processUserAnswersAndSaveResult(userId);
+
+        if (userResult == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userResult);
+    }
+
 }
