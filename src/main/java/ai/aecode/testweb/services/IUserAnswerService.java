@@ -10,5 +10,5 @@ public interface IUserAnswerService {
     List<UserAnswer> list();
     public void delete(int id_useranswer);
     public UserAnswer listId(int id_useranswer);
-    public UserResult processUserAnswersAndSaveResult(int userId) ;
+    public UserResult processUserAnswersAndSaveResult(String email) ;
 }

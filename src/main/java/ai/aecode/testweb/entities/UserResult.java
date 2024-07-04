@@ -93,9 +93,4 @@ public class UserResult {
         this.person_type_description = person_type_description;
     }
 
-    public void SetResults(double rManager, double rDeveloper, double rExecutor){
-        this.result_manager = rManager;
-        this.result_developer = rDeveloper;
-        this.result_executor = rExecutor;
-    }
 }

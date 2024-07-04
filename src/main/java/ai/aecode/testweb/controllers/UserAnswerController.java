@@ -54,9 +54,9 @@ public class UserAnswerController {
         uaS.insert(u);
     }
 
-    @GetMapping("/userresult/{userId}")
-    public ResponseEntity<UserResult> getUserResult(@PathVariable("userId") Integer userId) {
-        UserResult userResult = uaS.processUserAnswersAndSaveResult(userId);
+    @GetMapping("/userresult/{email}")
+    public ResponseEntity<UserResult> getUserResult(@PathVariable("email") String email) {
+        UserResult userResult = uaS.processUserAnswersAndSaveResult(email);
 
         if (userResult == null) {
             return ResponseEntity.notFound().build();

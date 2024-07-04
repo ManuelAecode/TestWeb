@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface IUserProfileRepository extends JpaRepository<UserProfile, Integer> {
-    @Query("SELECT u FROM UserProfile u WHERE u.id_user = :id")
-    UserProfile findUser(int id);
+    @Query("SELECT u FROM UserProfile u WHERE u.user_email = :email")
+    UserProfile findUser(String email);
 }

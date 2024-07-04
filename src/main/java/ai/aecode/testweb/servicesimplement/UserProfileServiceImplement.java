@@ -48,8 +48,8 @@ public class UserProfileServiceImplement implements IUserProfileService {
     }
 
     @Override
-    public List<UserQuestionDTO> getUserQuestionnaireByElement(int userId) {
-        UserProfile userProfile = upR.findUser(userId);
+    public List<UserQuestionDTO> getUserQuestionnaireByElement(String email) {
+        UserProfile userProfile = upR.findUser(email);
         if (userProfile == null || userProfile.getElement() == null) {
             return Collections.emptyList(); // o manejar como sea necesario
         }

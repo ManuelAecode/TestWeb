@@ -51,14 +51,4 @@ public class UserAnswer {
         this.answer = answer;
     }
 
-    //Formulas
-    public void calculateTotalValues(UserResult userResult){
-        double totalManager=answer.stream().mapToDouble(Answer::getValue_manager)
-                .reduce(1,(a,b)->a*b);
-        double totalDeveloper=answer.stream().mapToDouble(Answer::getValue_developer)
-                .reduce(1,(a,b)->a*b);
-        double totalExecutor=answer.stream().mapToDouble(Answer::getValue_executor)
-                .reduce(1,(a,b)->a*b);
-        userResult.SetResults(totalManager, totalDeveloper, totalExecutor);
-    }
 }

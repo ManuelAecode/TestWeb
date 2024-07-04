@@ -50,9 +50,9 @@ public class UserProfileController {
         upS.insert(s);
     }
 
-    @GetMapping("/{userId}/questions")
-    public ResponseEntity<List<UserQuestionDTO>> getUserQuestionsByElement(@PathVariable int userId) {
-        List<UserQuestionDTO> questions = upS.getUserQuestionnaireByElement(userId);
+    @GetMapping("/{email}/questions")
+    public ResponseEntity<List<UserQuestionDTO>> getUserQuestionsByElement(@PathVariable String email) {
+        List<UserQuestionDTO> questions = upS.getUserQuestionnaireByElement(email);
         if (questions == null) {
             return ResponseEntity.notFound().build(); // Manejar caso de usuario no encontrado
         }
