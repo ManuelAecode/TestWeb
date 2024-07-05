@@ -4,6 +4,8 @@ import ai.aecode.testweb.entities.PersonType;
 import ai.aecode.testweb.entities.UserProfile;
 import jakarta.persistence.Column;
 
+import java.util.List;
+
 
 public class UserResultDTO {
     private int id_userresult;
@@ -13,6 +15,7 @@ public class UserResultDTO {
     private Double result_developer;
     private Double result_executor;
     private String person_type_description;
+    private List<SkillDTO> skill;
 
     public int getId_userresult() {
         return id_userresult;
@@ -68,5 +71,13 @@ public class UserResultDTO {
 
     public void setPerson_type_description(String person_type_description) {
         this.person_type_description = person_type_description;
+    }
+
+    public List<SkillDTO> getSkill() {
+        return skill;
+    }
+
+    public void setSkill(List<SkillDTO> skill) {
+        this.skill = skill;
     }
 }

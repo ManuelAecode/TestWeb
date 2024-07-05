@@ -38,6 +38,9 @@ public class AnswerController {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.typeMap(Answer.class, AnswerDTO.class)
                 .addMapping(src -> src.getQuestion().getId_question(), AnswerDTO::setId_question)
+                .addMapping(Answer::getValue_skill_manager, AnswerDTO::setValue_skill_manager)
+                .addMapping(Answer::getValue_skill_developer, AnswerDTO::setValue_skill_developer)
+                .addMapping(Answer::getValue_skill_executor, AnswerDTO::setValue_skill_executor)
                 .addMapping(Answer::getValue_manager, AnswerDTO::setValue_manager)
                 .addMapping(Answer::getValue_developer, AnswerDTO::setValue_developer)
                 .addMapping(Answer::getValue_executor, AnswerDTO::setValue_executor);

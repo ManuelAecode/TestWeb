@@ -2,6 +2,10 @@ package ai.aecode.testweb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "userresult")
 public class UserResult {
@@ -24,10 +28,17 @@ public class UserResult {
     @Column(name = "person_type_description")
     private String person_type_description;
 
+    @ManyToMany
+    @JoinTable(name = "detail_skill",
+            joinColumns = @JoinColumn(name = "id_userresult"),
+            inverseJoinColumns = @JoinColumn(name = "id_skill"))
+    private Set<Skill> skill;
+
+
     public UserResult() {
     }
 
-    public UserResult(int id_userresult, UserProfile userProfile, PersonType personType, Double result_manager, Double result_developer, Double result_executor, String person_type_description) {
+    public UserResult(int id_userresult, UserProfile userProfile, PersonType personType, Double result_manager, Double result_developer, Double result_executor, String person_type_description, Set<Skill> skill) {
         this.id_userresult = id_userresult;
         this.userProfile = userProfile;
         this.personType = personType;
@@ -35,6 +46,7 @@ public class UserResult {
         this.result_developer = result_developer;
         this.result_executor = result_executor;
         this.person_type_description = person_type_description;
+        this.skill = skill;
     }
 
     public int getId_userresult() {
@@ -93,4 +105,11 @@ public class UserResult {
         this.person_type_description = person_type_description;
     }
 
+    public Set<Skill> getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Set<Skill> skill) {
+        this.skill = skill;
+    }
 }
