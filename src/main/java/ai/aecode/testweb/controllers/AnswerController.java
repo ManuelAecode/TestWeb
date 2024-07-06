@@ -45,6 +45,7 @@ public class AnswerController {
                 .addMapping(Answer::getValue_developer, AnswerDTO::setValue_developer)
                 .addMapping(Answer::getValue_executor, AnswerDTO::setValue_executor);
 
+
         List<Answer> answerList = aS.list();
         List<AnswerDTO> answerDTOList = answerList.stream()
                 .map(answer -> modelMapper.map(answer, AnswerDTO.class))

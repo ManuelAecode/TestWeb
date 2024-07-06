@@ -1,6 +1,4 @@
 package ai.aecode.testweb.dtos;
-import ai.aecode.testweb.entities.Question;
-import jakarta.persistence.Column;
 
 public class AnswerDTO {
     private int id_answer;

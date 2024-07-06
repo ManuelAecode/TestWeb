@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserAnswerServiceImplement implements IUserAnswerService {
@@ -136,7 +133,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
                 gender_executor = 70;
             }
 
-        }else if (signName.equals("Geminis")) {
+        }else if (signName.equals("Géminis")) {
             // Asignar los puntajes según la edad del usuario
             if (age >= 18 && age <= 25) {
                 birthday_manager = 55;
@@ -163,7 +160,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
                 gender_executor = 60;
             }
 
-        }else if (signName.equals("Cancer")) {
+        }else if (signName.equals("Cáncer")) {
             // Asignar los puntajes según la edad del usuario
             if (age >= 18 && age <= 25) {
                 birthday_manager = 65;
@@ -187,7 +184,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             }else if(gender.equals("Femenino")){
                 gender_manager = 85;
                 gender_developer = 75;
-                gender_executor = 00;
+                gender_executor = 70;
             }
 
 
@@ -453,20 +450,20 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             personTypeDescription = "Persona con habilidades predominantes de Ejecutor";
         }
 
-        //SKILLS
-        // Crear y guardar las Skills asociadas al UserResult
-        Set<Skill> skills = new HashSet<>();
+        // SKILLS
+        // Crear y guardar las Skills asociadas al UserResult, ordenadas por nombre
+        List<Skill> skills = new ArrayList<>();
         for (UserAnswer userAnswer : userAnswers) {
             for (Answer answer : userAnswer.getAnswer()) {
                 int maxValue = Math.max(answer.getValue_skill_manager(),
                         Math.max(answer.getValue_skill_developer(), answer.getValue_skill_executor()));
-                Skill skill = new Skill();
-                skill.setSkill_name(answer.getQuestion().getSkill().getSkill_name());
-                skill.setFinal_score(maxValue);
-                skills.add(skill);
+                Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
+                if (skill != null) {
+                    skill.setFinal_score(maxValue);
+                    skills.add(skill);
+                }
             }
         }
-
 
         // Crear y devolver el objeto UserResult
         UserResult userResult = new UserResult();
@@ -478,7 +475,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         userResult.setPerson_type_description(personTypeDescription);
 
         // Agregar las skills al UserResult
-        userResult.setSkill(skills);
+        userResult.setSkill(new HashSet<>(skills));
         return userResult;
     }
 }

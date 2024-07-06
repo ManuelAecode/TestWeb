@@ -66,6 +66,11 @@ public class UserProfileServiceImplement implements IUserProfileService {
                                 AnswerDTO answerDTO = new AnswerDTO();
                                 answerDTO.setId_answer(answer.getId_answer());
                                 answerDTO.setAnswer_text(answer.getAnswer_text());
+                                // Establece los valores como value_skill_manager, value_skill_developer, value_skill_executor aquí
+                                answerDTO.setValue_skill_manager(answer.getValue_skill_manager());
+                                answerDTO.setValue_skill_developer(answer.getValue_skill_developer());
+                                answerDTO.setValue_skill_executor(answer.getValue_skill_executor());
+
                                 // Establece los valores como value_manager, value_developer, value_executor aquí
                                 answerDTO.setValue_manager(answer.getValue_manager());
                                 answerDTO.setValue_developer(answer.getValue_developer());
