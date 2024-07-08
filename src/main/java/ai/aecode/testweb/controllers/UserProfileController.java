@@ -37,10 +37,10 @@ public class UserProfileController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id")Integer id){upS.delete(id);}
 
-    @GetMapping("/{id}")
-    public UserProfileDTO listId(@PathVariable("id")Integer id){
+    @GetMapping("/{email}")
+    public UserProfileDTO listId(@PathVariable("email") String email){
         ModelMapper m=new ModelMapper();
-        UserProfileDTO dto=m.map(upS.listId(id),UserProfileDTO.class);
+        UserProfileDTO dto=m.map(upS.listId(email),UserProfileDTO.class);
         return dto;
     }
     @PutMapping

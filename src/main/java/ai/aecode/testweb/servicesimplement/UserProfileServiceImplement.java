@@ -43,8 +43,8 @@ public class UserProfileServiceImplement implements IUserProfileService {
     }
 
     @Override
-    public UserProfile listId(int id_user) {
-        return upR.findById(id_user).orElse(null);
+    public UserProfile listId(String email) {
+        return upR.findUser(email);
     }
 
     @Override

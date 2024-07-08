@@ -9,6 +9,6 @@ public interface IUserProfileService {
     public void insert(UserProfile userprofile);
     List<UserProfile> list();
     public void delete(int id_user);
-    public UserProfile listId(int id_user);
+    public UserProfile listId(String email);
     List<UserQuestionDTO> getUserQuestionnaireByElement(String email);
 }
