@@ -1,5 +1,8 @@
 package ai.aecode.testweb.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,9 +23,15 @@ public class UserResult {
     @JoinColumn(name = "id_person_type")
     private PersonType personType;
     @Column(name = "result_manager")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.0")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Double result_manager;
     @Column(name = "result_developer")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.0")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Double result_developer;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.0")
+    @JsonSerialize(using = ToStringSerializer.class)
     @Column(name = "result_executor")
     private Double result_executor;
     @Column(name = "person_type_description")

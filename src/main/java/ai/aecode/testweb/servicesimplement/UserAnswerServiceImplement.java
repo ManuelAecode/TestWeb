@@ -7,6 +7,9 @@ import ai.aecode.testweb.services.IUserResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -430,10 +433,21 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         double percentageManager = (totalManager*100)/(totalSum);
         double percentageDeveloper = (totalDeveloper*100)/(totalSum);
         double percentageExecutor = (totalExecutor*100)/(totalSum);;
+        /*
         // Redondear a un decimal
         percentageManager = Math.round(percentageManager * 10.0) / 10.0;
         percentageDeveloper = Math.round(percentageDeveloper * 10.0) / 10.0;
         percentageExecutor = Math.round(percentageExecutor * 10.0) / 10.0;
+*/
+
+        // Redondear a un decimal y asegurar un decimal fijo utilizando DecimalFormat
+        BigDecimal bdPercentageManager = new BigDecimal(percentageManager).setScale(1, RoundingMode.HALF_UP);
+        BigDecimal bdPercentageDeveloper = new BigDecimal(percentageDeveloper).setScale(1, RoundingMode.HALF_UP);
+        BigDecimal bdPercentageExecutor = new BigDecimal(percentageExecutor).setScale(1, RoundingMode.HALF_UP);
+
+        percentageManager = bdPercentageManager.doubleValue();
+        percentageDeveloper = bdPercentageDeveloper.doubleValue();
+        percentageExecutor = bdPercentageExecutor.doubleValue();
 
         // Determinar el tipo de persona (PersonType)
         PersonType personType;
