@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserAnswerServiceImplement implements IUserAnswerService {
@@ -433,12 +434,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         double percentageManager = (totalManager*100)/(totalSum);
         double percentageDeveloper = (totalDeveloper*100)/(totalSum);
         double percentageExecutor = (totalExecutor*100)/(totalSum);;
-        /*
-        // Redondear a un decimal
-        percentageManager = Math.round(percentageManager * 10.0) / 10.0;
-        percentageDeveloper = Math.round(percentageDeveloper * 10.0) / 10.0;
-        percentageExecutor = Math.round(percentageExecutor * 10.0) / 10.0;
-*/
+
 
         // Redondear a un decimal y asegurar un decimal fijo utilizando DecimalFormat
         BigDecimal bdPercentageManager = new BigDecimal(percentageManager).setScale(1, RoundingMode.HALF_UP);
@@ -464,6 +460,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             personTypeDescription = "Persona con habilidades predominantes de Ejecutor";
         }
 
+        /*
         // SKILLS
         // Crear y guardar las Skills asociadas al UserResult, ordenadas por nombre
         List<Skill> skills = new ArrayList<>();
@@ -478,6 +475,41 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
                 }
             }
         }
+        */
+
+        // Crear dos listas para los dos grupos de habilidades
+        List<Skill> hemisferioDerecho = new ArrayList<>();
+        List<Skill> hemisferioIzquierdo = new ArrayList<>();
+
+        // Dividir las habilidades en los dos grupos y asignar el puntaje máximo
+        for (UserAnswer userAnswer : userAnswers) {
+            for (Answer answer : userAnswer.getAnswer()) {
+                Manager *= answer.getValue_manager();
+                Developer *= answer.getValue_developer();
+                Executor *= answer.getValue_executor();
+
+                int maxValue = Math.max(answer.getValue_skill_manager(),
+                        Math.max(answer.getValue_skill_developer(), answer.getValue_skill_executor()));
+                Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
+                if (skill != null) {
+                    skill.setFinal_score(maxValue);
+                    if (isHemisferioDerecho(skill.getSkill_name())) {
+                        hemisferioDerecho.add(skill);
+                    } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
+                        hemisferioIzquierdo.add(skill);
+                    }
+                }
+            }
+        }
+
+        // Ordenar cada grupo de habilidades por el puntaje final en orden descendente
+        hemisferioDerecho.sort((s1, s2) -> Integer.compare(s2.getFinal_score(), s1.getFinal_score()));
+        hemisferioIzquierdo.sort((s1, s2) -> Integer.compare(s2.getFinal_score(), s1.getFinal_score()));
+
+        // Seleccionar las tres habilidades con mayor puntaje de cada grupo
+        List<Skill> topSkills = new ArrayList<>();
+        topSkills.addAll(hemisferioDerecho.stream().limit(3).collect(Collectors.toList()));
+        topSkills.addAll(hemisferioIzquierdo.stream().limit(3).collect(Collectors.toList()));
 
         // Crear y devolver el objeto UserResult
         UserResult userResult = new UserResult();
@@ -489,7 +521,21 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         userResult.setPerson_type_description(personTypeDescription);
 
         // Agregar las skills al UserResult
-        userResult.setSkill(new HashSet<>(skills));
+        userResult.setSkill(new HashSet<>(topSkills));
+
         return userResult;
+    }
+    // Método auxiliar para determinar si una habilidad pertenece al Hemisferio Derecho
+    private boolean isHemisferioDerecho(String skillName) {
+        return skillName.equals("Creatividad") || skillName.equals("Resiliencia") ||
+                skillName.equals("Pensamiento Crítico") || skillName.equals("Comunicación Efectiva") ||
+                skillName.equals("Adaptabilidad") || skillName.equals("Coordinación y Organización");
+    }
+
+    // Método auxiliar para determinar si una habilidad pertenece al Hemisferio Izquierdo
+    private boolean isHemisferioIzquierdo(String skillName) {
+        return skillName.equals("Pensamiento Lógico") || skillName.equals("Precisión y Atención al Detalle") ||
+                skillName.equals("Resolución de Problemas Técnicos") || skillName.equals("Manejo de Herramientas") ||
+                skillName.equals("Planificación Estratégica") || skillName.equals("Gestión de Recursos");
     }
 }
