@@ -27,9 +27,23 @@ public class UserProfileServiceImplement implements IUserProfileService {
     @Autowired
     private IAnswerRepository aR;
 
+
     @Override
-    public void insert(UserProfile userprofile) {
-        upR.save(userprofile);
+    public void insert(UserProfile userProfile) {
+        UserProfile existingUserProfile = upR.findByUsernameOrEmail(userProfile.getUser_email());
+
+        if (existingUserProfile != null) {
+            // Actualizar perfil del usuario
+            existingUserProfile.setUser_name(userProfile.getUser_name());
+            existingUserProfile.setUser_birthday(userProfile.getUser_birthday());
+            existingUserProfile.setUser_gender(userProfile.getUser_gender());
+            existingUserProfile.setZodiacsign(userProfile.getZodiacsign());
+            existingUserProfile.setElement(userProfile.getElement());
+            upR.save(existingUserProfile);
+        } else {
+            // Crear nuevo perfil de usuario
+            upR.save(userProfile);
+        }
     }
 
     @Override
@@ -44,12 +58,12 @@ public class UserProfileServiceImplement implements IUserProfileService {
 
     @Override
     public UserProfile listId(String email) {
-        return upR.findUser(email);
+        return upR.findByUserEmail(email);
     }
 
     @Override
     public List<UserQuestionDTO> getUserQuestionnaireByElement(String email) {
-        UserProfile userProfile = upR.findUser(email);
+        UserProfile userProfile = upR.findByUserEmail(email);
         if (userProfile == null || userProfile.getElement() == null) {
             return Collections.emptyList(); // o manejar como sea necesario
         }
@@ -91,4 +105,5 @@ public class UserProfileServiceImplement implements IUserProfileService {
                 .collect(Collectors.toList());
         return userQuestionDTOs;
     }
+
 }

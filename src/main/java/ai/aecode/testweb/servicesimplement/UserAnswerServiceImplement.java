@@ -30,6 +30,25 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
 
     @Override
     public void insert(UserAnswer useranswer) {
+
+        // Buscar el perfil del usuario por correo electrónico
+        String email = useranswer.getUserProfile().getUser_email();
+        UserProfile userProfile = upR.findByUserEmail(email);
+
+        if (userProfile != null) {
+            // Obtener las respuestas anteriores y eliminarlas
+            List<UserAnswer> existingUserAnswers = uaR.findByUserProfile(userProfile);
+            if (!existingUserAnswers.isEmpty()) {
+                uaR.deleteAll(existingUserAnswers);
+            }
+
+            // Asociar el perfil del usuario existente a las nuevas respuestas
+            useranswer.setUserProfile(userProfile);
+        } else {
+            throw new RuntimeException("No se encontró el perfil del usuario");
+        }
+
+        // Guardar las nuevas respuestas del usuario
         uaR.save(useranswer);
     }
 
@@ -51,7 +70,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
     @Override
     public UserResult processUserAnswersAndSaveResult(String email) {
         // Obtener el perfil del usuario por ID
-        UserProfile userProfile = upR.findUser(email);
+        UserProfile userProfile = upR.findByUserEmail(email);
 
         // Obtener las respuestas del usuario
         List<UserAnswer> userAnswers = uaR.findByUserProfile(userProfile);

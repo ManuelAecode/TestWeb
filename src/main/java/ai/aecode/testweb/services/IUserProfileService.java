@@ -11,4 +11,5 @@ public interface IUserProfileService {
     public void delete(int id_user);
     public UserProfile listId(String email);
     List<UserQuestionDTO> getUserQuestionnaireByElement(String email);
+
 }

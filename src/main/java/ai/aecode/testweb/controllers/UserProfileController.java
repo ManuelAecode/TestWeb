@@ -22,8 +22,8 @@ public class UserProfileController {
     @PostMapping
     public void insert(@RequestBody UserProfileDTO dto){
         ModelMapper m=new ModelMapper();
-        UserProfile s= m.map(dto,UserProfile.class);
-        upS.insert(s);
+        UserProfile up= m.map(dto,UserProfile.class);
+        upS.insert(up);
     }
 
     @GetMapping
@@ -46,8 +46,8 @@ public class UserProfileController {
     @PutMapping
     public void update(@RequestBody UserProfileDTO dto) {
         ModelMapper m = new ModelMapper();
-        UserProfile s = m.map(dto, UserProfile.class);
-        upS.insert(s);
+        UserProfile up = m.map(dto, UserProfile.class);
+        upS.insert(up);
     }
 
     @GetMapping("/{email}/questions")
