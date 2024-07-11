@@ -465,9 +465,68 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         percentageExecutor = bdPercentageExecutor.doubleValue();
 
         // Determinar el tipo de persona (PersonType)
-        PersonType personType;
-        String personTypeDescription;
-
+        PersonType personType=null;
+        String personTypeDescription="";
+        int d=20;
+        double max_percentage = Math.max(percentageManager, Math.max(percentageDeveloper, percentageExecutor));
+        if(max_percentage==percentageManager){
+            if(max_percentage-percentageDeveloper<=d){
+                if(max_percentage-percentageExecutor<=d){
+                    personType = ptR.findByPersonTypeName("Equilibrado");
+                    personTypeDescription = "Persona con habilidades predominantes en todos los campos";
+                }else{
+                    personType = ptR.findByPersonTypeName("Gestor - Desarrollador");
+                    personTypeDescription = "Persona con habilidades predominantes de Gestor y Desarrollador";
+                }
+            }else{
+                if(max_percentage-percentageExecutor<=d){
+                    personType = ptR.findByPersonTypeName("Gestor - Ejecutor");
+                    personTypeDescription = "Persona con habilidades predominantes de Gestor y Ejecutor";
+                }else{
+                    personType = ptR.findByPersonTypeName("Gestor");
+                    personTypeDescription = "Persona con habilidades predominantes de Gestor";
+                }
+            }
+        }
+        if(max_percentage==percentageDeveloper){
+            if(max_percentage-percentageManager<=d){
+                if(max_percentage-percentageExecutor<=d){
+                    personType = ptR.findByPersonTypeName("Equilibrado");
+                    personTypeDescription = "Persona con habilidades predominantes en todos los campos";
+                }else{
+                    personType = ptR.findByPersonTypeName("Gestor - Desarrollador");
+                    personTypeDescription = "Persona con habilidades predominantes de Gestor y Desarrollador";
+                }
+            }else{
+                if(max_percentage-percentageExecutor<=d){
+                    personType = ptR.findByPersonTypeName("Ejecutor - Desarrollador");
+                    personTypeDescription = "Persona con habilidades predominantes de Ejecutor - Desarrollador";
+                }else{
+                    personType = ptR.findByPersonTypeName("Desarrollador");
+                    personTypeDescription = "Persona con habilidades predominantes de Desarrollador";
+                }
+            }
+        }
+        if(max_percentage==percentageExecutor){
+            if(max_percentage-percentageDeveloper<=d){
+                if(max_percentage-percentageManager<=d){
+                    personType = ptR.findByPersonTypeName("Equilibrado");
+                    personTypeDescription = "Persona con habilidades predominantes en todos los campos";
+                }else{
+                    personType = ptR.findByPersonTypeName("Ejecutor - Desarrollador");
+                    personTypeDescription = "Persona con habilidades predominantes de Ejecutor - Desarrollador";
+                }
+            }else{
+                if(max_percentage-percentageManager<=d){
+                    personType = ptR.findByPersonTypeName("Gestor - Ejecutor");
+                    personTypeDescription = "Persona con habilidades predominantes de Gestor - Ejecutor";
+                }else{
+                    personType = ptR.findByPersonTypeName("Ejecutor");
+                    personTypeDescription = "Persona con habilidades predominantes de Ejecutor";
+                }
+            }
+        }
+        /*
         if (percentageManager > percentageDeveloper && percentageManager > percentageExecutor) {
             personType = ptR.findByPersonTypeName("Gestor");
             personTypeDescription = "Persona con habilidades predominantes de Gestor";
@@ -478,6 +537,9 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             personType = ptR.findByPersonTypeName("Ejecutor");
             personTypeDescription = "Persona con habilidades predominantes de Ejecutor";
         }
+        */
+
+
 
         /*
         // SKILLS
