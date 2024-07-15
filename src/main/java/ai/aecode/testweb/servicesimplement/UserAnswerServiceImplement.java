@@ -69,7 +69,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
 
     @Override
     public UserResult processUserAnswersAndSaveResult(String email) {
-        // Obtener el perfil del usuario por ID
+        // Obtener el perfil del usuario por email
         UserProfile userProfile = upR.findByUserEmail(email);
 
         // Obtener las respuestas del usuario
@@ -78,9 +78,9 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
 
 
         // Calcular los resultados
-        double Manager = 1.0;
-        double Developer = 1.0;
-        double Executor = 1.0;
+        double Manager = 0.0;
+        double Developer = 0.0;
+        double Executor = 0.0;
 
         // Obtener el signo zodiacal del usuario
         ZodiacSign zodiacSign = userProfile.getZodiacsign();
@@ -433,21 +433,21 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         double percentage_gender=0.45;
 
         //valores de los personajes segun edad y genero
-        double value_manager=(birthday_manager*percentage_age)+(gender_manager*percentage_gender);
-        double value_developer=(birthday_developer*percentage_age)+(gender_developer*percentage_gender);
-        double value_executor=(birthday_executor*percentage_age)+(gender_executor*percentage_gender);
+        double value_manager_pesos=(birthday_manager*percentage_age)+(gender_manager*percentage_gender);
+        double value_developer_pesos=(birthday_developer*percentage_age)+(gender_developer*percentage_gender);
+        double value_executor_pesos=(birthday_executor*percentage_age)+(gender_executor*percentage_gender);
 
 
         for (UserAnswer userAnswer : userAnswers) {
             for (Answer answer : userAnswer.getAnswer()) {
-                Manager *= answer.getValue_manager();
-                Developer *= answer.getValue_developer();
-                Executor *= answer.getValue_executor();
+                Manager += answer.getValue_manager();
+                Developer += answer.getValue_developer();
+                Executor += answer.getValue_executor();
             }
         }
-        double totalManager =value_manager * Manager;
-        double totalDeveloper = value_developer * Developer;
-        double totalExecutor = value_executor * Executor;
+        double totalManager =value_manager_pesos * Manager;
+        double totalDeveloper = value_developer_pesos * Developer;
+        double totalExecutor = value_executor_pesos * Executor;
 
         double totalSum = totalManager + totalDeveloper + totalExecutor;
         double percentageManager = (totalManager*100)/(totalSum);
@@ -456,9 +456,9 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
 
 
         // Redondear a un decimal y asegurar un decimal fijo utilizando DecimalFormat
-        BigDecimal bdPercentageManager = new BigDecimal(percentageManager).setScale(1, RoundingMode.HALF_UP);
-        BigDecimal bdPercentageDeveloper = new BigDecimal(percentageDeveloper).setScale(1, RoundingMode.HALF_UP);
-        BigDecimal bdPercentageExecutor = new BigDecimal(percentageExecutor).setScale(1, RoundingMode.HALF_UP);
+        BigDecimal bdPercentageManager = new BigDecimal(percentageManager).setScale(0, RoundingMode.HALF_UP);
+        BigDecimal bdPercentageDeveloper = new BigDecimal(percentageDeveloper).setScale(0, RoundingMode.HALF_UP);
+        BigDecimal bdPercentageExecutor = new BigDecimal(percentageExecutor).setScale(0, RoundingMode.HALF_UP);
 
         percentageManager = bdPercentageManager.doubleValue();
         percentageDeveloper = bdPercentageDeveloper.doubleValue();
@@ -526,37 +526,6 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
                 }
             }
         }
-        /*
-        if (percentageManager > percentageDeveloper && percentageManager > percentageExecutor) {
-            personType = ptR.findByPersonTypeName("Gestor");
-            personTypeDescription = "Persona con habilidades predominantes de Gestor";
-        } else if (percentageDeveloper > percentageManager && percentageDeveloper > percentageExecutor) {
-            personType = ptR.findByPersonTypeName("Desarrollador");
-            personTypeDescription = "Persona con habilidades predominantes de Desarrollador";
-        } else {
-            personType = ptR.findByPersonTypeName("Ejecutor");
-            personTypeDescription = "Persona con habilidades predominantes de Ejecutor";
-        }
-        */
-
-
-
-        /*
-        // SKILLS
-        // Crear y guardar las Skills asociadas al UserResult, ordenadas por nombre
-        List<Skill> skills = new ArrayList<>();
-        for (UserAnswer userAnswer : userAnswers) {
-            for (Answer answer : userAnswer.getAnswer()) {
-                int maxValue = Math.max(answer.getValue_skill_manager(),
-                        Math.max(answer.getValue_skill_developer(), answer.getValue_skill_executor()));
-                Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
-                if (skill != null) {
-                    skill.setFinal_score(maxValue);
-                    skills.add(skill);
-                }
-            }
-        }
-        */
 
         // Crear dos listas para los dos grupos de habilidades
         List<Skill> hemisferioDerecho = new ArrayList<>();
@@ -565,19 +534,38 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         // Dividir las habilidades en los dos grupos y asignar el puntaje máximo
         for (UserAnswer userAnswer : userAnswers) {
             for (Answer answer : userAnswer.getAnswer()) {
-                Manager *= answer.getValue_manager();
-                Developer *= answer.getValue_developer();
-                Executor *= answer.getValue_executor();
-
-                int maxValue = Math.max(answer.getValue_skill_manager(),
-                        Math.max(answer.getValue_skill_developer(), answer.getValue_skill_executor()));
-                Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
-                if (skill != null) {
-                    skill.setFinal_score(maxValue);
-                    if (isHemisferioDerecho(skill.getSkill_name())) {
-                        hemisferioDerecho.add(skill);
-                    } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
-                        hemisferioIzquierdo.add(skill);
+                if(max_percentage==percentageManager) {
+                    int maxValue = answer.getValue_skill_manager();
+                    Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
+                    if (skill != null) {
+                        skill.setFinal_score(maxValue);
+                        if (isHemisferioDerecho(skill.getSkill_name())) {
+                            hemisferioDerecho.add(skill);
+                        } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
+                            hemisferioIzquierdo.add(skill);
+                        }
+                    }
+                }else if(max_percentage==percentageDeveloper){
+                    int maxValue = answer.getValue_skill_developer();
+                    Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
+                    if (skill != null) {
+                        skill.setFinal_score(maxValue);
+                        if (isHemisferioDerecho(skill.getSkill_name())) {
+                            hemisferioDerecho.add(skill);
+                        } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
+                            hemisferioIzquierdo.add(skill);
+                        }
+                    }
+                }else if(max_percentage==percentageExecutor) {
+                    int maxValue = answer.getValue_skill_executor();
+                    Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
+                    if (skill != null) {
+                        skill.setFinal_score(maxValue);
+                        if (isHemisferioDerecho(skill.getSkill_name())) {
+                            hemisferioDerecho.add(skill);
+                        } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
+                            hemisferioIzquierdo.add(skill);
+                        }
                     }
                 }
             }
