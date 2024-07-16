@@ -473,18 +473,22 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             if(max_percentage-percentageDeveloper<=d){
                 if(max_percentage-percentageExecutor<=d){
                     personType = ptR.findByPersonTypeName("Equilibrado");
-                    personTypeDescription = "Persona con habilidades predominantes en todos los campos";
+                    personTypeDescription = "Persona versatil que se adapta facilmente a cualquier que tiene habilodades " +
+                            "como pensamiento critico, logico, etc en buenos porcentajes desarrollados. ";
                 }else{
                     personType = ptR.findByPersonTypeName("Gestor - Desarrollador");
-                    personTypeDescription = "Persona con habilidades predominantes de Gestor y Desarrollador";
+                    personTypeDescription = "Combina liderazgo y creatividad técnica, ideal para roles de gestión de" +
+                            " proyectos innovadores y coordinación de equipos. Fortalecer la ejecución aumenta la versatilidad y eficacia.";
                 }
             }else{
                 if(max_percentage-percentageExecutor<=d){
                     personType = ptR.findByPersonTypeName("Gestor - Ejecutor");
-                    personTypeDescription = "Persona con habilidades predominantes de Gestor y Ejecutor";
+                    personTypeDescription = "Combina liderazgo y ejecución precisa, ideal para roles de gestión de " +
+                            "proyectos y supervisión de operaciones. Fortalecer el desarrollo aumenta la adaptabilidad y eficacia.";
                 }else{
                     personType = ptR.findByPersonTypeName("Gestor");
-                    personTypeDescription = "Persona con habilidades predominantes de Gestor";
+                    personTypeDescription = "Combina liderazgo y organización, ideal para roles de dirección de proyectos " +
+                            "y coordinación de equipos. Fortalecer las habilidades técnicas y de ejecución aumenta la versatilidad y eficacia.";
                 }
             }
         }
@@ -492,18 +496,22 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             if(max_percentage-percentageManager<=d){
                 if(max_percentage-percentageExecutor<=d){
                     personType = ptR.findByPersonTypeName("Equilibrado");
-                    personTypeDescription = "Persona con habilidades predominantes en todos los campos";
+                    personTypeDescription = "Persona versatil que se adapta facilmente a cualquier que tiene habilodades " +
+                            "como pensamiento critico, logico, etc en buenos porcentajes desarrollados. ";
                 }else{
                     personType = ptR.findByPersonTypeName("Gestor - Desarrollador");
-                    personTypeDescription = "Persona con habilidades predominantes de Gestor y Desarrollador";
+                    personTypeDescription = "Combina liderazgo y creatividad técnica, ideal para roles de gestión de" +
+                            " proyectos innovadores y coordinación de equipos. Fortalecer la ejecución aumenta la versatilidad y eficacia.";
                 }
             }else{
                 if(max_percentage-percentageExecutor<=d){
                     personType = ptR.findByPersonTypeName("Ejecutor - Desarrollador");
-                    personTypeDescription = "Persona con habilidades predominantes de Ejecutor - Desarrollador";
+                    personTypeDescription = "Combina liderazgo, creatividad técnica y gestión, ideal para dirigir" +
+                            " proyectos innovadores y coordinar equipos. Fortalecer la ejecución mejora la eficacia y versatilidad.";
                 }else{
                     personType = ptR.findByPersonTypeName("Desarrollador");
-                    personTypeDescription = "Persona con habilidades predominantes de Desarrollador";
+                    personTypeDescription = "Se destaca por creatividad técnica e innovación. Ideal para roles en " +
+                            "desarrollo de nuevas tecnologías y programación avanzada. Fortalecer gestión y ejecución aumenta la versatilidad y liderazgo.";
                 }
             }
         }
@@ -511,18 +519,22 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
             if(max_percentage-percentageDeveloper<=d){
                 if(max_percentage-percentageManager<=d){
                     personType = ptR.findByPersonTypeName("Equilibrado");
-                    personTypeDescription = "Persona con habilidades predominantes en todos los campos";
+                    personTypeDescription = "Persona versatil que se adapta facilmente a cualquier que tiene habilodades " +
+                            "como pensamiento critico, logico, etc en buenos porcentajes desarrollados. ";
                 }else{
                     personType = ptR.findByPersonTypeName("Ejecutor - Desarrollador");
-                    personTypeDescription = "Persona con habilidades predominantes de Ejecutor - Desarrollador";
+                    personTypeDescription = "Combina liderazgo, creatividad técnica y gestión, ideal para dirigir" +
+                            " proyectos innovadores y coordinar equipos. Fortalecer la ejecución mejora la eficacia y versatilidad.";
                 }
             }else{
                 if(max_percentage-percentageManager<=d){
                     personType = ptR.findByPersonTypeName("Gestor - Ejecutor");
-                    personTypeDescription = "Persona con habilidades predominantes de Gestor - Ejecutor";
+                    personTypeDescription = "Combina liderazgo y ejecución precisa, ideal para roles de gestión de " +
+                            "proyectos y supervisión de operaciones. Fortalecer el desarrollo aumenta la adaptabilidad y eficacia.";
                 }else{
                     personType = ptR.findByPersonTypeName("Ejecutor");
-                    personTypeDescription = "Persona con habilidades predominantes de Ejecutor";
+                    personTypeDescription = "Se centra en la precisión técnica y la implementación. Ideal para roles " +
+                            "operativos y técnicos. Fortalecer gestión y desarrollo aumenta la versatilidad y liderazgo en proyectos complejos.";
                 }
             }
         }
