@@ -450,11 +450,25 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         double totalExecutor = value_executor_pesos * Executor;
 
         double totalSum = totalManager + totalDeveloper + totalExecutor;
-        double percentageManager = (totalManager*100)/(totalSum);
-        double percentageDeveloper = (totalDeveloper*100)/(totalSum);
-        double percentageExecutor = (totalExecutor*100)/(totalSum);;
+        double percentageManager = ((totalManager*100)/(totalSum));
+        double percentageDeveloper = ((totalDeveloper*100)/(totalSum));
+        double percentageExecutor = ((totalExecutor*100)/(totalSum));;
 
+        // Redondear a un número entero utilizando Math.round
+        int roundedPercentageManager = (int) Math.round(percentageManager);
+        int roundedPercentageDeveloper = (int) Math.round(percentageDeveloper);
+        int roundedPercentageExecutor = (int) Math.round(percentageExecutor);
 
+        // Asignar los valores redondeados de vuelta a los porcentajes
+        percentageManager = roundedPercentageManager;
+        percentageDeveloper = roundedPercentageDeveloper;
+        percentageExecutor = roundedPercentageExecutor;
+        // Convertir los valores a enteros
+        int finalPercentageManager = (int) percentageManager;
+        int finalPercentageDeveloper = (int) percentageDeveloper;
+        int finalPercentageExecutor = (int) percentageExecutor;
+
+        /*
         // Redondear a un decimal y asegurar un decimal fijo utilizando DecimalFormat
         BigDecimal bdPercentageManager = new BigDecimal(percentageManager).setScale(0, RoundingMode.HALF_UP);
         BigDecimal bdPercentageDeveloper = new BigDecimal(percentageDeveloper).setScale(0, RoundingMode.HALF_UP);
@@ -463,6 +477,8 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         percentageManager = bdPercentageManager.doubleValue();
         percentageDeveloper = bdPercentageDeveloper.doubleValue();
         percentageExecutor = bdPercentageExecutor.doubleValue();
+        */
+
 
         // Determinar el tipo de persona (PersonType)
         PersonType personType=null;
@@ -596,9 +612,9 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         UserResult userResult = new UserResult();
         userResult.setUserProfile(userProfile);
         userResult.setPersonType(personType);
-        userResult.setResult_manager(percentageManager);
-        userResult.setResult_developer(percentageDeveloper);
-        userResult.setResult_executor(percentageExecutor);
+        userResult.setResult_manager(finalPercentageManager);
+        userResult.setResult_developer(finalPercentageDeveloper);
+        userResult.setResult_executor(finalPercentageExecutor);
         userResult.setPerson_type_description(personTypeDescription);
 
         // Agregar las skills al UserResult

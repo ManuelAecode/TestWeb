@@ -11,9 +11,9 @@ public class UserResultDTO {
     private int id_userresult;
     private UserProfile userProfile;
     private PersonType personType;
-    private Double result_manager;
-    private Double result_developer;
-    private Double result_executor;
+    private Integer result_manager;
+    private Integer result_developer;
+    private Integer result_executor;
     private String person_type_description;
     private List<SkillDTO> skill;
 
@@ -41,27 +41,27 @@ public class UserResultDTO {
         this.personType = personType;
     }
 
-    public Double getResult_manager() {
+    public Integer getResult_manager() {
         return result_manager;
     }
 
-    public void setResult_manager(Double result_manager) {
+    public void setResult_manager(Integer result_manager) {
         this.result_manager = result_manager;
     }
 
-    public Double getResult_developer() {
+    public Integer getResult_developer() {
         return result_developer;
     }
 
-    public void setResult_developer(Double result_developer) {
+    public void setResult_developer(Integer result_developer) {
         this.result_developer = result_developer;
     }
 
-    public Double getResult_executor() {
+    public Integer getResult_executor() {
         return result_executor;
     }
 
-    public void setResult_executor(Double result_executor) {
+    public void setResult_executor(Integer result_executor) {
         this.result_executor = result_executor;
     }
 
