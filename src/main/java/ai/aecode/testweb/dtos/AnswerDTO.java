@@ -4,9 +4,9 @@ public class AnswerDTO {
     private int id_answer;
     private String answer_text;
 
-    private int value_skill_manager;
-    private int value_skill_developer;
-    private int value_skill_executor;
+    private double value_skill_manager;
+    private double value_skill_developer;
+    private double value_skill_executor;
 
 
     private double value_manager;
@@ -30,27 +30,27 @@ public class AnswerDTO {
         this.answer_text = answer_text;
     }
 
-    public int getValue_skill_manager() {
+    public double getValue_skill_manager() {
         return value_skill_manager;
     }
 
-    public void setValue_skill_manager(int value_skill_manager) {
+    public void setValue_skill_manager(double value_skill_manager) {
         this.value_skill_manager = value_skill_manager;
     }
 
-    public int getValue_skill_developer() {
+    public double getValue_skill_developer() {
         return value_skill_developer;
     }
 
-    public void setValue_skill_developer(int value_skill_developer) {
+    public void setValue_skill_developer(double value_skill_developer) {
         this.value_skill_developer = value_skill_developer;
     }
 
-    public int getValue_skill_executor() {
+    public double getValue_skill_executor() {
         return value_skill_executor;
     }
 
-    public void setValue_skill_executor(int value_skill_executor) {
+    public void setValue_skill_executor(double value_skill_executor) {
         this.value_skill_executor = value_skill_executor;
     }
 

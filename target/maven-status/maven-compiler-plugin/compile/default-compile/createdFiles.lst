@@ -6,6 +6,7 @@ ai\aecode\testweb\entities\ZodiacSign.class
 ai\aecode\testweb\repositories\IAnswerRepository.class
 ai\aecode\testweb\dtos\QuestionDTO.class
 ai\aecode\testweb\controllers\SkillController.class
+ai\aecode\testweb\entities\Person_Zodiac.class
 ai\aecode\testweb\entities\UserAnswer.class
 ai\aecode\testweb\TestwebApplication.class
 ai\aecode\testweb\repositories\ISkillRepository.class
@@ -19,6 +20,7 @@ ai\aecode\testweb\dtos\UserQuestionDTO.class
 ai\aecode\testweb\services\IPersonTypeService.class
 ai\aecode\testweb\servicesimplement\SkillServiceImplement.class
 ai\aecode\testweb\services\IUserAnswerService.class
+ai\aecode\testweb\repositories\IPerson_ZodiacRepository.class
 ai\aecode\testweb\dtos\UserAnswerDTO.class
 ai\aecode\testweb\entities\Skill.class
 ai\aecode\testweb\entities\Element.class
@@ -43,6 +45,7 @@ ai\aecode\testweb\dtos\UserProfileDTO.class
 ai\aecode\testweb\dtos\UserResultDTO.class
 ai\aecode\testweb\repositories\IUserResultRepository.class
 ai\aecode\testweb\services\IElementService.class
+ai\aecode\testweb\dtos\Person_ZodiacDTO.class
 ai\aecode\testweb\controllers\ElementController.class
 ai\aecode\testweb\services\IZodiacSignService.class
 ai\aecode\testweb\services\IQuestionService.class

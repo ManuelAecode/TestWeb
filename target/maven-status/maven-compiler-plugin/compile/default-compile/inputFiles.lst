@@ -25,6 +25,7 @@ C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\jav
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\dtos\QuestionDTO.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\repositories\IAnswerRepository.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\config\CorsConfig.java
+C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\dtos\Person_ZodiacDTO.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\repositories\IUserAnswerRepository.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\services\ISkillService.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\controllers\UserResultController.java
@@ -32,6 +33,8 @@ C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\jav
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\entities\Answer.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\services\IQuestionService.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\servicesimplement\QuestionServiceImplement.java
+C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\entities\Person_Zodiac.java
+C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\repositories\IPerson_ZodiacRepository.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\dtos\ElementDTO.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\entities\UserProfile.java
 C:\Users\MANUEL\OneDrive\Escritorio\manuel\AECODE 2\TestWeb\testweb\src\main\java\ai\aecode\testweb\services\IPersonTypeService.java

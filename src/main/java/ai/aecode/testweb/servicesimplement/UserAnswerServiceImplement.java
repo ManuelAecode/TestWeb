@@ -26,6 +26,9 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
     private IPersonTypeRepository ptR;
 
     @Autowired
+    private IPerson_ZodiacRepository pzR;
+
+    @Autowired
     private ISkillRepository sR;
 
     @Override
@@ -468,145 +471,182 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         int finalPercentageDeveloper = (int) percentageDeveloper;
         int finalPercentageExecutor = (int) percentageExecutor;
 
-        /*
-        // Redondear a un decimal y asegurar un decimal fijo utilizando DecimalFormat
-        BigDecimal bdPercentageManager = new BigDecimal(percentageManager).setScale(0, RoundingMode.HALF_UP);
-        BigDecimal bdPercentageDeveloper = new BigDecimal(percentageDeveloper).setScale(0, RoundingMode.HALF_UP);
-        BigDecimal bdPercentageExecutor = new BigDecimal(percentageExecutor).setScale(0, RoundingMode.HALF_UP);
-
-        percentageManager = bdPercentageManager.doubleValue();
-        percentageDeveloper = bdPercentageDeveloper.doubleValue();
-        percentageExecutor = bdPercentageExecutor.doubleValue();
-        */
-
 
         // Determinar el tipo de persona (PersonType)
-        PersonType personType=null;
+        String personTypeName = "";
         String personTypeDescription="";
         int d=20;
         double max_percentage = Math.max(percentageManager, Math.max(percentageDeveloper, percentageExecutor));
-        if(max_percentage==percentageManager){
-            if(max_percentage-percentageDeveloper<=d){
-                if(max_percentage-percentageExecutor<=d){
-                    personType = ptR.findByPersonTypeName("Equilibrado");
-                    personTypeDescription = "Persona versatil que se adapta facilmente a cualquier que tiene habilodades " +
-                            "como pensamiento critico, logico, etc en buenos porcentajes desarrollados. ";
-                }else{
-                    personType = ptR.findByPersonTypeName("Gestor - Desarrollador");
-                    personTypeDescription = "Combina liderazgo y creatividad técnica, ideal para roles de gestión de" +
-                            " proyectos innovadores y coordinación de equipos. Fortalecer la ejecución aumenta la versatilidad y eficacia.";
+
+        // Determinar el tipo de persona basado en los porcentajes
+        if (max_percentage == finalPercentageManager) {
+            if (max_percentage - finalPercentageDeveloper <= d) {
+                if (max_percentage - finalPercentageExecutor <= d) {
+                    personTypeName = "Equilibrado";
+                } else {
+                    personTypeName = "Gestor - Desarrollador";
                 }
-            }else{
-                if(max_percentage-percentageExecutor<=d){
-                    personType = ptR.findByPersonTypeName("Gestor - Ejecutor");
-                    personTypeDescription = "Combina liderazgo y ejecución precisa, ideal para roles de gestión de " +
-                            "proyectos y supervisión de operaciones. Fortalecer el desarrollo aumenta la adaptabilidad y eficacia.";
-                }else{
-                    personType = ptR.findByPersonTypeName("Gestor");
-                    personTypeDescription = "Combina liderazgo y organización, ideal para roles de dirección de proyectos " +
-                            "y coordinación de equipos. Fortalecer las habilidades técnicas y de ejecución aumenta la versatilidad y eficacia.";
+            } else {
+                if (max_percentage - finalPercentageExecutor <= d) {
+                    personTypeName = "Gestor - Ejecutor";
+                } else {
+                    personTypeName = "Gestor";
                 }
             }
-        }
-        if(max_percentage==percentageDeveloper){
-            if(max_percentage-percentageManager<=d){
-                if(max_percentage-percentageExecutor<=d){
-                    personType = ptR.findByPersonTypeName("Equilibrado");
-                    personTypeDescription = "Persona versatil que se adapta facilmente a cualquier que tiene habilodades " +
-                            "como pensamiento critico, logico, etc en buenos porcentajes desarrollados. ";
-                }else{
-                    personType = ptR.findByPersonTypeName("Gestor - Desarrollador");
-                    personTypeDescription = "Combina liderazgo y creatividad técnica, ideal para roles de gestión de" +
-                            " proyectos innovadores y coordinación de equipos. Fortalecer la ejecución aumenta la versatilidad y eficacia.";
+        } else if (max_percentage == finalPercentageDeveloper) {
+            if (max_percentage - finalPercentageManager <= d) {
+                if (max_percentage - finalPercentageExecutor <= d) {
+                    personTypeName = "Equilibrado";
+                } else {
+                    personTypeName = "Gestor - Desarrollador";
                 }
-            }else{
-                if(max_percentage-percentageExecutor<=d){
-                    personType = ptR.findByPersonTypeName("Ejecutor - Desarrollador");
-                    personTypeDescription = "Combina liderazgo, creatividad técnica y gestión, ideal para dirigir" +
-                            " proyectos innovadores y coordinar equipos. Fortalecer la ejecución mejora la eficacia y versatilidad.";
-                }else{
-                    personType = ptR.findByPersonTypeName("Desarrollador");
-                    personTypeDescription = "Se destaca por creatividad técnica e innovación. Ideal para roles en " +
-                            "desarrollo de nuevas tecnologías y programación avanzada. Fortalecer gestión y ejecución aumenta la versatilidad y liderazgo.";
+            } else {
+                if (max_percentage - finalPercentageExecutor <= d) {
+                    personTypeName = "Ejecutor - Desarrollador";
+                } else {
+                    personTypeName = "Desarrollador";
                 }
             }
-        }
-        if(max_percentage==percentageExecutor){
-            if(max_percentage-percentageDeveloper<=d){
-                if(max_percentage-percentageManager<=d){
-                    personType = ptR.findByPersonTypeName("Equilibrado");
-                    personTypeDescription = "Persona versatil que se adapta facilmente a cualquier que tiene habilodades " +
-                            "como pensamiento critico, logico, etc en buenos porcentajes desarrollados. ";
-                }else{
-                    personType = ptR.findByPersonTypeName("Ejecutor - Desarrollador");
-                    personTypeDescription = "Combina liderazgo, creatividad técnica y gestión, ideal para dirigir" +
-                            " proyectos innovadores y coordinar equipos. Fortalecer la ejecución mejora la eficacia y versatilidad.";
+        } else if (max_percentage == finalPercentageExecutor) {
+            if (max_percentage - finalPercentageDeveloper <= d) {
+                if (max_percentage - finalPercentageManager <= d) {
+                    personTypeName = "Equilibrado";
+                } else {
+                    personTypeName = "Ejecutor - Desarrollador";
                 }
-            }else{
-                if(max_percentage-percentageManager<=d){
-                    personType = ptR.findByPersonTypeName("Gestor - Ejecutor");
-                    personTypeDescription = "Combina liderazgo y ejecución precisa, ideal para roles de gestión de " +
-                            "proyectos y supervisión de operaciones. Fortalecer el desarrollo aumenta la adaptabilidad y eficacia.";
-                }else{
-                    personType = ptR.findByPersonTypeName("Ejecutor");
-                    personTypeDescription = "Se centra en la precisión técnica y la implementación. Ideal para roles " +
-                            "operativos y técnicos. Fortalecer gestión y desarrollo aumenta la versatilidad y liderazgo en proyectos complejos.";
+            } else {
+                if (max_percentage - finalPercentageManager <= d) {
+                    personTypeName = "Gestor - Ejecutor";
+                } else {
+                    personTypeName = "Ejecutor";
                 }
             }
         }
 
-        // Crear dos listas para los dos grupos de habilidades
+
+        // Obtener el tipo de persona desde la base de datos
+        PersonType personType = ptR.findByPersonTypeName(personTypeName);
+
+        // Buscar la descripción en la base de datos
+        Person_Zodiac personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign);
+
+        // Verificar y asignar la descripción
+        if (personZodiac != null) {
+            personTypeDescription = personZodiac.getDescription();
+        } else {
+            personTypeDescription = "Descripción no encontrada";
+        }
+
+        double skill_peso_manager=(percentageManager*0.8)/(max_percentage);
+        double skill_peso_developer=(percentageDeveloper*0.8)/(max_percentage);
+        double skill_peso_executor=(percentageExecutor*0.8)/(max_percentage);
+
+        /////////////////////////////////////////////////////////////
+
+        // Crear mapas para almacenar las habilidades por respuesta
+        Map<String, Integer> skillScoresManager = new HashMap<>();
+        Map<String, Integer> skillScoresDeveloper = new HashMap<>();
+        Map<String, Integer> skillScoresExecutor = new HashMap<>();
+
+        // Calcular las habilidades finales por respuesta
+        for (UserAnswer userAnswer : userAnswers) {
+            for (Answer answer : userAnswer.getAnswer()) {
+                double skill_manager = answer.getValue_skill_manager() * skill_peso_manager*100;
+                double skill_developer = answer.getValue_skill_developer() * skill_peso_developer*100;
+                double skill_executor = answer.getValue_skill_executor() * skill_peso_executor*100;
+
+                ///////////////////////
+
+                // Redondear a un número entero utilizando Math.round
+                int roundedFinalSkillManager = (int) Math.round(skill_manager);
+                int roundedFinalSkillDeveloper = (int) Math.round(skill_developer);
+                int roundedFinalSkillExecutor = (int) Math.round(skill_executor);
+                // Asignar los valores redondeados de vuelta a los porcentajes
+                skill_manager = roundedFinalSkillManager;
+                skill_developer = roundedFinalSkillDeveloper;
+                skill_executor = roundedFinalSkillExecutor;
+
+                // Convertir los valores a enteros
+                int final_skill_manager = (int) skill_manager;
+                int final_skill_developer = (int) skill_developer;
+                int final_skill_executor = (int) skill_executor;
+
+
+                ///////////////////////
+
+                // Determinar el valor máximo para cada habilidad
+                double maxSkillValue = Math.max(final_skill_manager, Math.max(final_skill_developer, final_skill_executor));
+
+                String skillName = answer.getQuestion().getSkill().getSkill_name();
+
+                // Asignar el puntaje final a la habilidad en base al máximo
+                if (maxSkillValue == final_skill_manager) {
+                    skillScoresManager.put(skillName, final_skill_manager);
+                } else if (maxSkillValue == final_skill_developer) {
+                    skillScoresDeveloper.put(skillName, final_skill_developer);
+                } else {
+                    skillScoresExecutor.put(skillName, final_skill_executor);
+                }
+            }
+        }
+
+        // Obtener las habilidades del Hemisferio Derecho e Izquierdo
         List<Skill> hemisferioDerecho = new ArrayList<>();
         List<Skill> hemisferioIzquierdo = new ArrayList<>();
 
-        // Dividir las habilidades en los dos grupos y asignar el puntaje máximo
-        for (UserAnswer userAnswer : userAnswers) {
-            for (Answer answer : userAnswer.getAnswer()) {
-                if(max_percentage==percentageManager) {
-                    int maxValue = answer.getValue_skill_manager();
-                    Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
-                    if (skill != null) {
-                        skill.setFinal_score(maxValue);
-                        if (isHemisferioDerecho(skill.getSkill_name())) {
-                            hemisferioDerecho.add(skill);
-                        } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
-                            hemisferioIzquierdo.add(skill);
-                        }
-                    }
-                }else if(max_percentage==percentageDeveloper){
-                    int maxValue = answer.getValue_skill_developer();
-                    Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
-                    if (skill != null) {
-                        skill.setFinal_score(maxValue);
-                        if (isHemisferioDerecho(skill.getSkill_name())) {
-                            hemisferioDerecho.add(skill);
-                        } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
-                            hemisferioIzquierdo.add(skill);
-                        }
-                    }
-                }else if(max_percentage==percentageExecutor) {
-                    int maxValue = answer.getValue_skill_executor();
-                    Skill skill = sR.findBySkillName(answer.getQuestion().getSkill().getSkill_name());
-                    if (skill != null) {
-                        skill.setFinal_score(maxValue);
-                        if (isHemisferioDerecho(skill.getSkill_name())) {
-                            hemisferioDerecho.add(skill);
-                        } else if (isHemisferioIzquierdo(skill.getSkill_name())) {
-                            hemisferioIzquierdo.add(skill);
-                        }
-                    }
+        // Clasificar las habilidades en hemisferios
+        for (Map.Entry<String, Integer> entry : skillScoresManager.entrySet()) {
+            Skill skill = sR.findBySkillName(entry.getKey());
+            if (skill != null) {
+                skill.setFinal_score(entry.getValue());
+                if (isHemisferioDerecho(skill.getSkill_name())) {
+                    hemisferioDerecho.add(skill);
+                } else {
+                    hemisferioIzquierdo.add(skill);
                 }
             }
         }
 
-        // Ordenar cada grupo de habilidades por el puntaje final en orden descendente
-        hemisferioDerecho.sort((s1, s2) -> Integer.compare(s2.getFinal_score(), s1.getFinal_score()));
-        hemisferioIzquierdo.sort((s1, s2) -> Integer.compare(s2.getFinal_score(), s1.getFinal_score()));
+        for (Map.Entry<String, Integer> entry : skillScoresDeveloper.entrySet()) {
+            Skill skill = sR.findBySkillName(entry.getKey());
+            if (skill != null) {
+                skill.setFinal_score(entry.getValue());
+                if (isHemisferioDerecho(skill.getSkill_name())) {
+                    hemisferioDerecho.add(skill);
+                } else {
+                    hemisferioIzquierdo.add(skill);
+                }
+            }
+        }
 
-        // Seleccionar las tres habilidades con mayor puntaje de cada grupo
+        for (Map.Entry<String, Integer> entry : skillScoresExecutor.entrySet()) {
+            Skill skill = sR.findBySkillName(entry.getKey());
+            if (skill != null) {
+                skill.setFinal_score(entry.getValue());
+                if (isHemisferioDerecho(skill.getSkill_name())) {
+                    hemisferioDerecho.add(skill);
+                } else {
+                    hemisferioIzquierdo.add(skill);
+                }
+            }
+        }
+        // Obtener las 3 habilidades más relevantes de cada hemisferio
+        List<Skill> topSkillsDerecho = hemisferioDerecho.stream()
+                .sorted(Comparator.comparingDouble(Skill::getFinal_score).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        List<Skill> topSkillsIzquierdo = hemisferioIzquierdo.stream()
+                .sorted(Comparator.comparingDouble(Skill::getFinal_score).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        // Crear el resultado final con las habilidades más relevantes
         List<Skill> topSkills = new ArrayList<>();
-        topSkills.addAll(hemisferioDerecho.stream().limit(3).collect(Collectors.toList()));
-        topSkills.addAll(hemisferioIzquierdo.stream().limit(3).collect(Collectors.toList()));
+        topSkills.addAll(topSkillsDerecho);
+        topSkills.addAll(topSkillsIzquierdo);
+        //////////////////////////////////////////////////////////////
+
 
         // Crear y devolver el objeto UserResult
         UserResult userResult = new UserResult();
