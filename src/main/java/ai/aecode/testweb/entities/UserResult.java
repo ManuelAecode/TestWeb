@@ -41,13 +41,19 @@ public class UserResult {
     @JoinTable(name = "detail_skill",
             joinColumns = @JoinColumn(name = "id_userresult"),
             inverseJoinColumns = @JoinColumn(name = "id_skill"))
-    private Set<Skill> skill;
+    private Set<Skill> skillderecho;
+
+    @ManyToMany
+    @JoinTable(name = "detail_skill",
+            joinColumns = @JoinColumn(name = "id_userresult"),
+            inverseJoinColumns = @JoinColumn(name = "id_skill"))
+    private Set<Skill> skillizquierdo;
 
 
     public UserResult() {
     }
 
-    public UserResult(int id_userresult, UserProfile userProfile, PersonType personType, Integer result_manager, Integer result_developer, Integer result_executor, String person_type_description, Set<Skill> skill) {
+    public UserResult(int id_userresult, UserProfile userProfile, PersonType personType, Integer result_manager, Integer result_developer, Integer result_executor, String person_type_description, Set<Skill> skillderecho, Set<Skill> skillizquierdo) {
         this.id_userresult = id_userresult;
         this.userProfile = userProfile;
         this.personType = personType;
@@ -55,7 +61,8 @@ public class UserResult {
         this.result_developer = result_developer;
         this.result_executor = result_executor;
         this.person_type_description = person_type_description;
-        this.skill = skill;
+        this.skillderecho = skillderecho;
+        this.skillizquierdo = skillizquierdo;
     }
 
     public int getId_userresult() {
@@ -114,11 +121,19 @@ public class UserResult {
         this.person_type_description = person_type_description;
     }
 
-    public Set<Skill> getSkill() {
-        return skill;
+    public Set<Skill> getSkillderecho() {
+        return skillderecho;
     }
 
-    public void setSkill(Set<Skill> skill) {
-        this.skill = skill;
+    public void setSkillderecho(Set<Skill> skillderecho) {
+        this.skillderecho = skillderecho;
+    }
+
+    public Set<Skill> getSkillizquierdo() {
+        return skillizquierdo;
+    }
+
+    public void setSkillizquierdo(Set<Skill> skillizquierdo) {
+        this.skillizquierdo = skillizquierdo;
     }
 }

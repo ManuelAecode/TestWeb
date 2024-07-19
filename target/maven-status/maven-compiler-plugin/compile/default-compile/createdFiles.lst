@@ -38,6 +38,7 @@ ai\aecode\testweb\services\IUserProfileService.class
 ai\aecode\testweb\controllers\AnswerController.class
 ai\aecode\testweb\controllers\PersonTypeController.class
 ai\aecode\testweb\repositories\IUserProfileRepository.class
+ai\aecode\testweb\servicesimplement\ExcelExportServiceImplement.class
 ai\aecode\testweb\controllers\UserResultController.class
 ai\aecode\testweb\services\ISkillService.class
 ai\aecode\testweb\repositories\IElementRepository.class
@@ -46,6 +47,7 @@ ai\aecode\testweb\dtos\UserResultDTO.class
 ai\aecode\testweb\repositories\IUserResultRepository.class
 ai\aecode\testweb\services\IElementService.class
 ai\aecode\testweb\dtos\Person_ZodiacDTO.class
+ai\aecode\testweb\services\IExcelExportService.class
 ai\aecode\testweb\controllers\ElementController.class
 ai\aecode\testweb\services\IZodiacSignService.class
 ai\aecode\testweb\services\IQuestionService.class

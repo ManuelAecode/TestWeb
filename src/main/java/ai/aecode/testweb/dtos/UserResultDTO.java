@@ -15,7 +15,8 @@ public class UserResultDTO {
     private Integer result_developer;
     private Integer result_executor;
     private String person_type_description;
-    private List<SkillDTO> skill;
+    private List<SkillDTO> skillderecho;
+    private List<SkillDTO> skillizquierdo;
 
     public int getId_userresult() {
         return id_userresult;
@@ -73,11 +74,19 @@ public class UserResultDTO {
         this.person_type_description = person_type_description;
     }
 
-    public List<SkillDTO> getSkill() {
-        return skill;
+    public List<SkillDTO> getSkillderecho() {
+        return skillderecho;
     }
 
-    public void setSkill(List<SkillDTO> skill) {
-        this.skill = skill;
+    public void setSkillderecho(List<SkillDTO> skillderecho) {
+        this.skillderecho = skillderecho;
+    }
+
+    public List<SkillDTO> getSkillizquierdo() {
+        return skillizquierdo;
+    }
+
+    public void setSkillizquierdo(List<SkillDTO> skillizquierdo) {
+        this.skillizquierdo = skillizquierdo;
     }
 }

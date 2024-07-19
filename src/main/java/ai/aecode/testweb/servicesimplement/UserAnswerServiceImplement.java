@@ -641,12 +641,7 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
                 .limit(3)
                 .collect(Collectors.toList());
 
-        // Crear el resultado final con las habilidades más relevantes
-        List<Skill> topSkills = new ArrayList<>();
-        topSkills.addAll(topSkillsDerecho);
-        topSkills.addAll(topSkillsIzquierdo);
         //////////////////////////////////////////////////////////////
-
 
         // Crear y devolver el objeto UserResult
         UserResult userResult = new UserResult();
@@ -658,7 +653,8 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         userResult.setPerson_type_description(personTypeDescription);
 
         // Agregar las skills al UserResult
-        userResult.setSkill(new HashSet<>(topSkills));
+        userResult.setSkillderecho(new HashSet<>(topSkillsDerecho));
+        userResult.setSkillizquierdo(new HashSet<>(topSkillsIzquierdo));
 
         return userResult;
     }
