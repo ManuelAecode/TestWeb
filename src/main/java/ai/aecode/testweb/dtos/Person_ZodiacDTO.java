@@ -7,6 +7,8 @@ public class Person_ZodiacDTO {
     private int id_person_zodiac;
     private PersonType personType;
     private ZodiacSign zodiacSign;
+    private Integer lowerPercentage;
+    private Integer upperPercentage;
     private String description;
 
     public int getId_person_zodiac() {
@@ -31,6 +33,22 @@ public class Person_ZodiacDTO {
 
     public void setZodiacSign(ZodiacSign zodiacSign) {
         this.zodiacSign = zodiacSign;
+    }
+
+    public Integer getLowerPercentage() {
+        return lowerPercentage;
+    }
+
+    public void setLowerPercentage(Integer lowerPercentage) {
+        this.lowerPercentage = lowerPercentage;
+    }
+
+    public Integer getUpperPercentage() {
+        return upperPercentage;
+    }
+
+    public void setUpperPercentage(Integer upperPercentage) {
+        this.upperPercentage = upperPercentage;
     }
 
     public String getDescription() {

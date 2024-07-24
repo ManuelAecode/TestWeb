@@ -27,15 +27,6 @@ public class UserProfileController {
         ModelMapper m=new ModelMapper();
         UserProfile up= m.map(dto,UserProfile.class);
         upS.insert(up);
-
-        try {
-            eeS.exportUserProfilesToExcel();
-            System.out.println("Backup successfully created in /tmp.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Failed to create backup: " + e.getMessage());
-        }
-
     }
 
     @GetMapping

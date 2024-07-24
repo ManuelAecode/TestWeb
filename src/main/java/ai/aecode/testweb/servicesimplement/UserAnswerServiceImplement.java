@@ -475,60 +475,129 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         // Determinar el tipo de persona (PersonType)
         String personTypeName = "";
         String personTypeDescription="";
+        Person_Zodiac personZodiac = null;
+        PersonType personType=null;
+        int percentageToCheck;
         int d=20;
-        double max_percentage = Math.max(percentageManager, Math.max(percentageDeveloper, percentageExecutor));
+        int max_percentage = Math.max(finalPercentageManager, Math.max(finalPercentageDeveloper, finalPercentageExecutor));
 
         // Determinar el tipo de persona basado en los porcentajes
         if (max_percentage == finalPercentageManager) {
             if (max_percentage - finalPercentageDeveloper <= d) {
                 if (max_percentage - finalPercentageExecutor <= d) {
                     personTypeName = "Equilibrado";
+                    // Obtener el tipo de persona desde la base de datos
+                    personType = ptR.findByPersonTypeName(personTypeName);
+
+                    // Calcular el promedio de las diferencias
+                    int differenceDeveloper = max_percentage - finalPercentageDeveloper;
+                    int differenceExecutor = max_percentage - finalPercentageExecutor;
+                    int averageDifference = (differenceDeveloper + differenceExecutor) / 2;
+                    // Buscar la descripción en la base de datos usando el promedio
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, averageDifference);
                 } else {
                     personTypeName = "Gestor - Desarrollador";
+                    // Obtener el tipo de persona desde la base de datos
+                    personType = ptR.findByPersonTypeName(personTypeName);
+                    // Sumar los porcentajes
+                    percentageToCheck = finalPercentageManager + finalPercentageDeveloper;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 }
             } else {
                 if (max_percentage - finalPercentageExecutor <= d) {
                     personTypeName = "Gestor - Ejecutor";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Sumar los porcentajes
+                    percentageToCheck = finalPercentageManager + finalPercentageExecutor;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 } else {
                     personTypeName = "Gestor";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Verificar el porcentaje en el rango específico
+                    percentageToCheck = finalPercentageManager;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 }
             }
         } else if (max_percentage == finalPercentageDeveloper) {
             if (max_percentage - finalPercentageManager <= d) {
                 if (max_percentage - finalPercentageExecutor <= d) {
                     personTypeName = "Equilibrado";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+
+                    // Calcular el promedio de las diferencias
+                    int differenceManager = max_percentage - finalPercentageManager;
+                    int differenceExecutor = max_percentage - finalPercentageExecutor;
+                    int averageDifference = (differenceManager + differenceExecutor) / 2;
+                    // Buscar la descripción en la base de datos usando el promedio
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, averageDifference);
                 } else {
                     personTypeName = "Gestor - Desarrollador";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Sumar los porcentajes
+                    percentageToCheck = finalPercentageManager + finalPercentageDeveloper;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 }
             } else {
                 if (max_percentage - finalPercentageExecutor <= d) {
                     personTypeName = "Ejecutor - Desarrollador";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Sumar los porcentajes
+                    percentageToCheck = finalPercentageExecutor + finalPercentageDeveloper;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
+
                 } else {
                     personTypeName = "Desarrollador";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Verificar el porcentaje en el rango específico
+                    percentageToCheck = finalPercentageDeveloper;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 }
             }
         } else if (max_percentage == finalPercentageExecutor) {
             if (max_percentage - finalPercentageDeveloper <= d) {
                 if (max_percentage - finalPercentageManager <= d) {
                     personTypeName = "Equilibrado";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+
+                    // Calcular el promedio de las diferencias
+                    int differenceManager = max_percentage - finalPercentageManager;
+                    int differenceDeveloper = max_percentage - finalPercentageDeveloper;
+                    int averageDifference = (differenceManager + differenceDeveloper) / 2;
+                    // Buscar la descripción en la base de datos usando el promedio
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, averageDifference);
                 } else {
                     personTypeName = "Ejecutor - Desarrollador";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Sumar los porcentajes
+                    percentageToCheck = finalPercentageExecutor + finalPercentageDeveloper;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 }
             } else {
                 if (max_percentage - finalPercentageManager <= d) {
                     personTypeName = "Gestor - Ejecutor";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Sumar los porcentajes
+                    percentageToCheck = finalPercentageManager + finalPercentageExecutor;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 } else {
                     personTypeName = "Ejecutor";
+                    // Obtener el tipo de persona desde la base de datos
+                     personType = ptR.findByPersonTypeName(personTypeName);
+                    // Verificar el porcentaje en el rango específico
+                    percentageToCheck = finalPercentageExecutor;
+                    personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign, percentageToCheck);
                 }
             }
         }
-
-
-        // Obtener el tipo de persona desde la base de datos
-        PersonType personType = ptR.findByPersonTypeName(personTypeName);
-
-        // Buscar la descripción en la base de datos
-        Person_Zodiac personZodiac = pzR.findByPersonTypeAndZodiacSign(personType, zodiacSign);
 
         // Verificar y asignar la descripción
         if (personZodiac != null) {
@@ -536,6 +605,8 @@ public class UserAnswerServiceImplement implements IUserAnswerService {
         } else {
             personTypeDescription = "Descripción no encontrada";
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         double skill_peso_manager=(percentageManager*0.8)/(max_percentage);
         double skill_peso_developer=(percentageDeveloper*0.8)/(max_percentage);
