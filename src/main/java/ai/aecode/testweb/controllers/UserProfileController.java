@@ -3,14 +3,11 @@ package ai.aecode.testweb.controllers;
 import ai.aecode.testweb.dtos.UserProfileDTO;
 import ai.aecode.testweb.dtos.UserQuestionDTO;
 import ai.aecode.testweb.entities.UserProfile;
-import ai.aecode.testweb.services.IExcelExportService;
 import ai.aecode.testweb.services.IUserProfileService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,14 +16,13 @@ import java.util.stream.Collectors;
 public class UserProfileController {
     @Autowired
     private IUserProfileService upS;
-    @Autowired
-    private IExcelExportService eeS;
 
     @PostMapping
     public void insert(@RequestBody UserProfileDTO dto){
         ModelMapper m=new ModelMapper();
         UserProfile up= m.map(dto,UserProfile.class);
         upS.insert(up);
+
     }
 
     @GetMapping

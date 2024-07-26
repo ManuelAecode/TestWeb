@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ai.aecode.testweb.TestwebApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 32.11 s -- in ai.aecode.testweb.TestwebApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.11 s -- in ai.aecode.testweb.TestwebApplicationTests
